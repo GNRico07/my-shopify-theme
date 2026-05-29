@@ -274,7 +274,7 @@
           box-shadow:0 8px 28px rgba(255,107,53,.4);
           transition:background .2s,transform .2s,box-shadow .2s;
           font-family:'Nunito',sans-serif;display:inline-block;
-        ">Shop the Drop 👕</a>
+        ">Shop the Drop</a>
         <a class="fz-btn-ghost" href="/collections/all" style="
           background:rgba(255,255,255,.05);color:#F5F0E8;
           padding:15px 34px;border-radius:40px;
