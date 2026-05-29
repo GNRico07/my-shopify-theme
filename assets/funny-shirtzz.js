@@ -4,14 +4,16 @@
 (function () {
   'use strict';
 
-  /* ---- SVG shapes ---- */
-  const SHIRT   = `<svg width="70" height="70" viewBox="0 0 24 24" fill="#FDC308"><path d="M16 2l-2 3H10L8 2 3 6v6l3 1v9h12v-9l3-1V6z"/></svg>`;
-  const SHIRT_Y = `<svg width="64" height="64" viewBox="0 0 24 24" fill="#FDF502"><path d="M16 2l-2 3H10L8 2 3 6v6l3 1v9h12v-9l3-1V6z"/></svg>`;
-  const STAR    = `<svg width="50" height="50" viewBox="0 0 24 24" fill="#FCD55A"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>`;
-  const STAR_SM = `<svg width="36" height="36" viewBox="0 0 24 24" fill="#FDC308"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>`;
-  const SMILEY  = `<svg width="62" height="62" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FDF502"/><circle cx="8.5" cy="10" r="1.6" fill="#06065A"/><circle cx="15.5" cy="10" r="1.6" fill="#06065A"/><path d="M7 14c1.5 2.5 8.5 2.5 10 0" stroke="#06065A" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`;
-  const BOLT    = `<svg width="45" height="45" viewBox="0 0 24 24" fill="#FDF502"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H13z"/></svg>`;
-  const CIRCLE  = `<svg width="80" height="80" viewBox="0 0 24 24" fill="#FDC308" opacity="0.4"><circle cx="12" cy="12" r="10"/></svg>`;
+  const isHomepage = window.location.pathname === '/' || window.location.pathname === '';
+
+  /* ---- SVG shapes (charcoal+orange palette) ---- */
+  const SHIRT   = `<svg width="70" height="70" viewBox="0 0 24 24" fill="#FF6B35"><path d="M16 2l-2 3H10L8 2 3 6v6l3 1v9h12v-9l3-1V6z"/></svg>`;
+  const SHIRT_Y = `<svg width="64" height="64" viewBox="0 0 24 24" fill="#FF8C5A"><path d="M16 2l-2 3H10L8 2 3 6v6l3 1v9h12v-9l3-1V6z"/></svg>`;
+  const STAR    = `<svg width="50" height="50" viewBox="0 0 24 24" fill="#F5F0E8"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>`;
+  const STAR_SM = `<svg width="36" height="36" viewBox="0 0 24 24" fill="#FF6B35"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>`;
+  const SMILEY  = `<svg width="62" height="62" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF8C5A"/><circle cx="8.5" cy="10" r="1.6" fill="#1C1C1E"/><circle cx="15.5" cy="10" r="1.6" fill="#1C1C1E"/><path d="M7 14c1.5 2.5 8.5 2.5 10 0" stroke="#1C1C1E" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`;
+  const BOLT    = `<svg width="45" height="45" viewBox="0 0 24 24" fill="#F5F0E8"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H13z"/></svg>`;
+  const CIRCLE  = `<svg width="80" height="80" viewBox="0 0 24 24" fill="#FF6B35" opacity="0.3"><circle cx="12" cy="12" r="10"/></svg>`;
 
   /* ---- Inject keyframes ---- */
   function injectKeyframes() {
@@ -101,9 +103,9 @@
       align-items:center;
       justify-content:center;
       background:
-        radial-gradient(circle at 20% 20%, rgba(1,0,188,.6), transparent 45%),
-        radial-gradient(circle at 80% 70%, rgba(0,0,114,.7), transparent 50%),
-        linear-gradient(160deg,#06065A,#0100BC) !important;
+        radial-gradient(circle at 20% 20%, rgba(255,107,53,.15), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(44,44,46,.9), transparent 50%),
+        linear-gradient(160deg,#1C1C1E,#2C2C2E) !important;
       overflow:hidden;
     `;
 
@@ -159,21 +161,21 @@
 
       <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
         <a class="fz-btn-primary" href="/collections/all" style="
-          background:#FDC308;color:#06065A;
+          background:#FF6B35;color:#ffffff;
           padding:16px 36px;border-radius:40px;
           font-weight:800;font-size:1.05rem;
           text-decoration:none;
-          box-shadow:0 8px 24px rgba(253,195,8,.35);
+          box-shadow:0 8px 24px rgba(255,107,53,.35);
           transition:background .25s,transform .25s,box-shadow .25s;
           font-family:'Nunito',sans-serif;
           display:inline-block;cursor:pointer;
         ">Shop the Drop</a>
 
         <a class="fz-btn-ghost" href="/collections/all" style="
-          background:transparent;color:#fff;
+          background:transparent;color:#F5F0E8;
           padding:16px 32px;border-radius:40px;
           font-weight:800;font-size:1.05rem;
-          border:2px solid rgba(255,255,255,.4);
+          border:2px solid rgba(245,240,232,.4);
           text-decoration:none;transition:border-color .25s,color .25s;
           font-family:'Nunito',sans-serif;
           display:inline-block;cursor:pointer;
@@ -231,7 +233,7 @@
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
 
-    const colors = ['#FDC308','#FDF502','#FCD55A','#0100BC','#dfe2ff','#ffffff'];
+    const colors = ['#FF6B35','#FF8C5A','#F5F0E8','#2C2C2E','#A8A09A','#ffffff'];
     const pieces = Array.from({length: 140}, () => ({
       x: Math.random() * canvas.width, y: -10 - Math.random() * 300,
       w: 6 + Math.random() * 9, h: 3 + Math.random() * 6,
@@ -296,13 +298,15 @@
   /* ---- Init ---- */
   function init() {
     injectKeyframes();
-    launchConfetti();
     fixNavLogo();
-    buildHero();
+    if (isHomepage) {
+      launchConfetti();
+      buildHero();
+    }
     addSectionFloaties();
     initFadeIn();
     initSparkles();
-    setTimeout(initCardGlow, 800); // wait for product cards to render
+    setTimeout(initCardGlow, 800);
   }
 
   if (document.readyState === 'loading') {

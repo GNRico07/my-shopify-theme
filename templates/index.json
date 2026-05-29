@@ -281,10 +281,130 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "marquee_fz": {
+      "type": "marquee",
+      "blocks": {
+        "text_1": {
+          "type": "_marquee-text",
+          "settings": {
+            "text": "\ud83d\ude02 Funny Shirtz",
+            "type_preset": "h4"
+          }
+        },
+        "text_2": {
+          "type": "_marquee-text",
+          "settings": {
+            "text": "\ud83d\udc55 Wear the Joke",
+            "type_preset": "h4"
+          }
+        },
+        "text_3": {
+          "type": "_marquee-text",
+          "settings": {
+            "text": "\ud83d\udd25 Fresh Drops Daily",
+            "type_preset": "h4"
+          }
+        },
+        "text_4": {
+          "type": "_marquee-text",
+          "settings": {
+            "text": "\u2728 Soft Cotton Tees",
+            "type_preset": "h4"
+          }
+        },
+        "text_5": {
+          "type": "_marquee-text",
+          "settings": {
+            "text": "\ud83d\ude1c Zero Seriousness",
+            "type_preset": "h4"
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "text_2",
+        "text_3",
+        "text_4",
+        "text_5"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "speed": 30,
+        "pause_on_hover": true,
+        "color_scheme": "scheme-5",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
+    },
+    "why_us_fz": {
+      "type": "media-with-content",
+      "blocks": {
+        "text_why": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Why Funny Shirtz?</h2><p>Because life's too short for boring clothes. We print bold, funny, conversation-starting tees on premium soft cotton \u2014 shipped fast, designed to make people actually laugh out loud.</p>",
+            "type_preset": "rte"
+          }
+        },
+        "feat_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>\u2705 <strong>Premium soft cotton</strong> \u2014 feels as good as the joke lands</p>",
+            "type_preset": "rte"
+          }
+        },
+        "feat_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>\ud83d\ude9a <strong>Fast shipping</strong> \u2014 from our shop to your door in days</p>",
+            "type_preset": "rte"
+          }
+        },
+        "feat_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>\ud83d\ude02 <strong>100+ original designs</strong> \u2014 new drops every week</p>",
+            "type_preset": "rte"
+          }
+        },
+        "feat_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>\u21a9\ufe0f <strong>Easy returns</strong> \u2014 if it doesn't fit, we make it right</p>",
+            "type_preset": "rte"
+          }
+        },
+        "btn_why": {
+          "type": "button",
+          "settings": {
+            "label": "Shop All Tees",
+            "link": "shopify://collections/all",
+            "style_class": "button-primary"
+          }
+        }
+      },
+      "block_order": [
+        "text_why",
+        "feat_1",
+        "feat_2",
+        "feat_3",
+        "feat_4",
+        "btn_why"
+      ],
+      "name": "Why Us",
+      "settings": {
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "marquee_fz",
+    "product_list_fa6P9H",
+    "why_us_fz"
   ]
 }
