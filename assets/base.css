@@ -4214,17 +4214,6 @@ product-recommendations:has([data-has-recommendations='false']) {
   }
 }
 
-/* Custom header colors: yellow background, blue text/icons */
-.header-section,
-.header-section [class*='color-'] {
-  --color-background: rgb(255, 215, 0) !important;
-  --color-foreground: rgb(0, 56, 153) !important;
-  --color-foreground-heading: rgb(0, 56, 153) !important;
-  --color-background-rgb: 255, 215, 0 !important;
-  --color-foreground-rgb: 0, 56, 153 !important;
-  background-color: #FFD700 !important;
-  color: #003899 !important;
-}
 
 .header-section svg,
 .header-section path {
