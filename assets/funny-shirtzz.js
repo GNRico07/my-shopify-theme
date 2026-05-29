@@ -158,31 +158,26 @@
       ">Wearable jokes that actually land. Bold designs, soft cotton, zero seriousness allowed.</p>
 
       <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
-        <a href="/collections/all" style="
+        <a class="fz-btn-primary" href="/collections/all" style="
           background:#FDC308;color:#06065A;
           padding:16px 36px;border-radius:40px;
           font-weight:800;font-size:1.05rem;
           text-decoration:none;
           box-shadow:0 8px 24px rgba(253,195,8,.35);
-          transition:.25s;font-family:'Nunito',sans-serif;
-          display:inline-block;
-        "
-        onmouseover="this.style.background='#FDF502';this.style.transform='translateY(-3px) scale(1.03)'"
-        onmouseout="this.style.background='#FDC308';this.style.transform='none'"
-        >Shop the Drop</a>
+          transition:background .25s,transform .25s,box-shadow .25s;
+          font-family:'Nunito',sans-serif;
+          display:inline-block;cursor:pointer;
+        ">Shop the Drop</a>
 
-        <a href="/collections" style="
+        <a class="fz-btn-ghost" href="/collections/all" style="
           background:transparent;color:#fff;
           padding:16px 32px;border-radius:40px;
           font-weight:800;font-size:1.05rem;
           border:2px solid rgba(255,255,255,.4);
-          text-decoration:none;transition:.25s;
+          text-decoration:none;transition:border-color .25s,color .25s;
           font-family:'Nunito',sans-serif;
-          display:inline-block;
-        "
-        onmouseover="this.style.borderColor='#FDF502';this.style.color='#FDF502'"
-        onmouseout="this.style.borderColor='rgba(255,255,255,.4)';this.style.color='#fff'"
-        >Browse Collections</a>
+          display:inline-block;cursor:pointer;
+        ">Browse Collections</a>
       </div>
     `;
 

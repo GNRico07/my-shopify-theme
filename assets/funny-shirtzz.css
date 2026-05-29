@@ -316,3 +316,14 @@ main,
   width: 100%;
   height: auto;
 }
+
+/* ---- Hero injected buttons ---- */
+.fz-btn-primary:hover {
+  background: #FDF502 !important;
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 12px 30px rgba(253,245,2,.4) !important;
+}
+.fz-btn-ghost:hover {
+  border-color: #FDF502 !important;
+  color: #FDF502 !important;
+}
