@@ -1,0 +1,138 @@
+/* ===========================
+   FUNNY SHIRTZZ — Custom Styles
+   =========================== */
+
+/* ---- Floating emoji characters ---- */
+.fz-floaters {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.fz-floater {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  animation: fz-float linear infinite;
+  user-select: none;
+}
+
+@keyframes fz-float {
+  0%   { transform: translateY(100vh) rotate(0deg);   opacity: 0; }
+  5%   { opacity: 0.18; }
+  95%  { opacity: 0.18; }
+  100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+}
+
+/* ---- Hero headline pop-in ---- */
+.fz-hero-title {
+  display: inline-block;
+  animation: fz-pop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes fz-pop {
+  from { transform: scale(0.5) translateY(30px); opacity: 0; }
+  to   { transform: scale(1) translateY(0);       opacity: 1; }
+}
+
+/* ---- Wiggle on hover for product cards ---- */
+.product-card-wrapper:hover .product-media,
+.card-information:hover {
+  animation: fz-wiggle 0.4s ease;
+}
+
+@keyframes fz-wiggle {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(-3deg) scale(1.03); }
+  40%  { transform: rotate(3deg) scale(1.03); }
+  60%  { transform: rotate(-2deg); }
+  80%  { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ---- Bounce CTA button ---- */
+.button, .btn, [class*="button"] {
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+.button:hover, .btn:hover, [class*="button"]:hover {
+  transform: translateY(-3px) scale(1.04) !important;
+  box-shadow: 0 8px 20px rgba(255, 61, 127, 0.35) !important;
+}
+.button:active, [class*="button"]:active {
+  transform: translateY(0px) scale(0.97) !important;
+}
+
+/* ---- Announcement bar pulse ---- */
+.header-section .header-announcements__content,
+announcement-bar {
+  animation: fz-pulse-bg 4s ease-in-out infinite;
+}
+
+@keyframes fz-pulse-bg {
+  0%, 100% { filter: brightness(1); }
+  50%       { filter: brightness(1.08); }
+}
+
+/* ---- Product card lift on hover ---- */
+.card-wrapper, .product-card-wrapper {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card-wrapper:hover, .product-card-wrapper:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(255, 61, 127, 0.2);
+}
+
+/* ---- Scroll fade-in for sections ---- */
+.fz-fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fz-fade-in.fz-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Sparkle burst on page load ---- */
+.fz-sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 1.5rem;
+  animation: fz-sparkle-burst 1s ease forwards;
+}
+@keyframes fz-sparkle-burst {
+  0%   { transform: scale(0) rotate(0deg);   opacity: 1; }
+  60%  { transform: scale(1.4) rotate(180deg); opacity: 1; }
+  100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+
+/* ---- Logo text glow if no image logo ---- */
+.header__logo-link span,
+.header__logo-text {
+  background: linear-gradient(90deg, #ff6b35, #ff3d7f, #ffe600, #ff6b35);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fz-logo-shimmer 3s linear infinite;
+  font-weight: 800 !important;
+}
+@keyframes fz-logo-shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* ---- Confetti canvas ---- */
+#fz-confetti-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+}
