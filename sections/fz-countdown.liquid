@@ -2,138 +2,51 @@
   <div class="fz-drop-eyebrow">Monthly Drop</div>
   <h2 class="fz-drop-title">Next <span>Fresh Drop</span> Dropping In</h2>
   <p class="fz-drop-sub">New designs every month — subscribe so you don't miss out.</p>
-
   <div class="fz-clock">
     <div class="fz-unit"><span class="fz-unit-val" id="fzD">00</span><span class="fz-unit-label">Days</span></div>
     <div class="fz-unit"><span class="fz-unit-val" id="fzH">00</span><span class="fz-unit-label">Hours</span></div>
     <div class="fz-unit"><span class="fz-unit-val" id="fzM">00</span><span class="fz-unit-label">Minutes</span></div>
     <div class="fz-unit"><span class="fz-unit-val" id="fzS">00</span><span class="fz-unit-label">Seconds</span></div>
   </div>
-
   <p class="fz-drop-note">Drops on the <strong>1st of every month</strong> — get first access when you subscribe below.</p>
 </div>
 
 <script>
-(function () {
-  function nextDrop() {
-    var n = new Date();
-    return new Date(n.getFullYear(), n.getMonth() + 1, 1, 0, 0, 0);
+(function(){
+  function nextDrop(){var n=new Date();return new Date(n.getFullYear(),n.getMonth()+1,1,0,0,0);}
+  function pad(n){return String(n).padStart(2,'0');}
+  function update(id,val){
+    var el=document.getElementById(id);if(!el)return;
+    var s=pad(val);if(el.textContent!==s){el.textContent=s;el.classList.add('fz-flip');setTimeout(function(){el.classList.remove('fz-flip');},160);}
   }
-  function pad(n) { return String(n).padStart(2, '0'); }
-  function update(id, val) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var s = pad(val);
-    if (el.textContent !== s) {
-      el.textContent = s;
-      el.classList.add('fz-flip');
-      setTimeout(function () { el.classList.remove('fz-flip'); }, 160);
-    }
+  function tick(){
+    var diff=Math.max(0,nextDrop()-Date.now());
+    update('fzD',Math.floor(diff/86400000));
+    update('fzH',Math.floor((diff%86400000)/3600000));
+    update('fzM',Math.floor((diff%3600000)/60000));
+    update('fzS',Math.floor((diff%60000)/1000));
   }
-  function tick() {
-    var diff = Math.max(0, nextDrop() - Date.now());
-    update('fzD', Math.floor(diff / 86400000));
-    update('fzH', Math.floor((diff % 86400000) / 3600000));
-    update('fzM', Math.floor((diff % 3600000) / 60000));
-    update('fzS', Math.floor((diff % 60000) / 1000));
-  }
-  tick();
-  setInterval(tick, 1000);
+  tick();setInterval(tick,1000);
 })();
 </script>
 
 {% stylesheet %}
-.fz-drop {
-  text-align: center;
-  padding: 72px 24px;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #1C1C1E 0%, #242426 50%, #1C1C1E 100%);
-}
-.fz-drop::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(255,107,53,.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.fz-drop-eyebrow {
-  display: inline-block;
-  background: rgba(255,107,53,.12);
-  border: 1px solid rgba(255,107,53,.4);
-  color: #FF8C5A;
-  padding: 6px 18px;
-  border-radius: 30px;
-  font-weight: 800;
-  font-size: .75rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  font-family: 'Nunito', sans-serif;
-  margin-bottom: 20px;
-  display: inline-block;
-}
-.fz-drop-title {
-  font-family: 'Fredoka', sans-serif !important;
-  font-size: 2.4rem;
-  color: #F5F0E8 !important;
-  margin-bottom: 8px;
-}
-.fz-drop-title span { color: #FF6B35 !important; }
-.fz-drop-sub {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1rem;
-  color: #6B6560;
-  margin-bottom: 40px;
-}
-.fz-clock {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-.fz-unit {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,107,53,.2);
-  border-radius: 16px;
-  padding: 20px 28px;
-  min-width: 90px;
-  transition: border-color .3s;
-}
-.fz-unit:hover { border-color: #FF6B35; }
-.fz-unit-val {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 3rem;
-  color: #F5F0E8;
-  line-height: 1;
-  display: block;
-  transition: transform .15s ease, color .15s ease;
-}
-.fz-unit-val.fz-flip {
-  transform: scale(1.2);
-  color: #FF6B35;
-}
-.fz-unit-label {
-  font-family: 'Nunito', sans-serif;
-  font-size: .7rem;
-  color: #6B6560;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 6px;
-  display: block;
-}
-.fz-drop-note {
-  font-family: 'Nunito', sans-serif;
-  font-size: .88rem;
-  color: #6B6560;
-  margin-top: 4px;
-}
-.fz-drop-note strong { color: #FF8C5A; }
+.fz-drop{text-align:center;padding:72px 24px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1C1C1E 0%,#242426 50%,#1C1C1E 100%);}
+.fz-drop::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,107,53,.08) 0%,transparent 70%);pointer-events:none;}
+.fz-drop-eyebrow{display:inline-block;background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.4);color:#FF8C5A;padding:6px 18px;border-radius:30px;font-weight:800;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;font-family:'Nunito',sans-serif;margin-bottom:20px;}
+.fz-drop-title{font-family:'Fredoka',sans-serif!important;font-size:2.4rem;color:#F5F0E8!important;margin-bottom:8px;}
+.fz-drop-title span{color:#FF6B35!important;}
+.fz-drop-sub{font-family:'Nunito',sans-serif;font-size:1rem;color:#6B6560;margin-bottom:40px;}
+.fz-clock{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+.fz-unit{background:rgba(255,255,255,.04);border:1px solid rgba(255,107,53,.2);border-radius:16px;padding:20px 28px;min-width:90px;transition:border-color .3s;}
+.fz-unit:hover{border-color:#FF6B35;}
+.fz-unit-val{font-family:'Fredoka',sans-serif;font-size:3rem;color:#F5F0E8;line-height:1;display:block;transition:transform .15s ease,color .15s ease;}
+.fz-unit-val.fz-flip{transform:scale(1.2);color:#FF6B35;}
+.fz-unit-label{font-family:'Nunito',sans-serif;font-size:.7rem;color:#6B6560;text-transform:uppercase;letter-spacing:1px;margin-top:6px;display:block;}
+.fz-drop-note{font-family:'Nunito',sans-serif;font-size:.88rem;color:#6B6560;}
+.fz-drop-note strong{color:#FF8C5A;}
 {% endstylesheet %}
 
 {% schema %}
-{
-  "name": "Drop Countdown",
-  "settings": []
-}
+{"name":"Drop Countdown","settings":[]}
 {% endschema %}
