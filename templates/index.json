@@ -399,12 +399,79 @@
         "padding-block-start": 80,
         "padding-block-end": 80
       }
+    },
+    "about_fz": {
+      "type": "media-with-content",
+      "blocks": {
+        "about_text": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>About Funny Shirtz</h2><p>We started Funny Shirtz because we got tired of wearing the same boring tees everyone else had. Based in Boise, Idaho, we design and print every shirt with one goal: make someone laugh.</p><p>From office humor to pop culture, we create wearable jokes that actually land. Every design is original, every shirt is printed on premium soft cotton, and every order is packed with care right here in the Treasure Valley.</p><p>Whether you're shopping for yourself or hunting for the perfect gift, you're in the right place. Life's too short for boring clothes.</p>",
+            "type_preset": "rte",
+            "width": "fill",
+            "max_width": "normal",
+            "alignment": "left",
+            "font": "var(--font-body--family)",
+            "color": "var(--color-foreground)",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "about_btn": {
+          "type": "button",
+          "settings": {
+            "label": "Shop Our Story",
+            "link": "shopify://collections/all",
+            "style_class": "button-primary",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "about_text",
+        "about_btn"
+      ],
+      "name": "About Us",
+      "settings": {
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
+    },
+    "trust_fz": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.fz-trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:1100px;margin:0 auto;padding:60px 24px;text-align:center;}\n.fz-trust-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,107,53,.15);border-radius:16px;padding:28px 20px;}\n.fz-trust-item .icon{font-size:2.2rem;margin-bottom:12px;}\n.fz-trust-item h4{font-family:'Fredoka',sans-serif;font-size:1.15rem;color:#F5F0E8;margin-bottom:8px;}\n.fz-trust-item p{font-size:.9rem;color:#A8A09A;line-height:1.5;}\n.fz-trust-title{text-align:center;padding:48px 24px 0;font-family:'Fredoka',sans-serif;font-size:2.2rem;color:#F5F0E8;}\n.fz-trust-title span{color:#FF6B35;}\n</style>\n<h2 class=\"fz-trust-title\">Why People <span>Love Us</span></h2>\n<div class=\"fz-trust\">\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83d\udc55</div><h4>Premium Cotton</h4><p>Super soft, pre-shrunk fabric that holds color wash after wash.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83c\udfa8</div><h4>Original Designs</h4><p>100+ exclusive designs \u2014 no recycled clip art, ever.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83d\ude9a</div><h4>Fast Shipping</h4><p>Orders ship within 2 business days right from Boise, Idaho.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\u21a9\ufe0f</div><h4>Easy Returns</h4><p>Not the right fit? No drama. Free returns within 30 days.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83d\ude02</div><h4>Guaranteed Laughs</h4><p>If your shirt doesn't get at least one laugh, we'll be very surprised.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83e\udd1d</div><h4>Real Support</h4><p>Email us anytime at griconac@gmail.com \u2014 we actually reply.</p></div>\n</div>",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 48
+      }
+    },
+    "testimonials_fz": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.fz-testimonials{max-width:1100px;margin:0 auto;padding:60px 24px;}\n.fz-testimonials h2{text-align:center;font-family:'Fredoka',sans-serif;font-size:2.2rem;color:#F5F0E8;margin-bottom:40px;}\n.fz-testimonials h2 span{color:#FF6B35;}\n.fz-reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}\n.fz-review{background:rgba(255,255,255,.04);border:1px solid rgba(255,107,53,.15);border-radius:16px;padding:24px;}\n.fz-stars{color:#FF6B35;font-size:1.1rem;margin-bottom:10px;}\n.fz-review p{color:#C4BBAF;font-size:.95rem;line-height:1.6;margin-bottom:14px;}\n.fz-reviewer{font-weight:800;color:#F5F0E8;font-size:.9rem;}\n.fz-reviewer span{color:#A8A09A;font-weight:400;}\n</style>\n<div class=\"fz-testimonials\">\n  <h2>What Customers <span>Are Saying</span></h2>\n  <div class=\"fz-reviews\">\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"Ordered the 'Professional Overthinker' tee and my coworkers immediately called me out. Best shirt I own.\"</p><div class=\"fz-reviewer\">Sarah M. <span>\u2014 Portland, OR</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"Super soft cotton, great fit, and the print hasn't faded after a dozen washes. Funny AND quality? Rare combo.\"</p><div class=\"fz-reviewer\">Jake T. <span>\u2014 Denver, CO</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"Bought 3 shirts as gifts. Everyone lost it when they opened them. Fast shipping too \u2014 arrived in 3 days.\"</p><div class=\"fz-reviewer\">Maria L. <span>\u2014 Austin, TX</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"The 'Error 404 Mood' shirt is my personality in fabric form. 10/10 would buy again.\"</p><div class=\"fz-reviewer\">Dev P. <span>\u2014 Seattle, WA</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"Customer service was amazing. Had an issue with sizing and they sorted it same day. Real humans, not bots.\"</p><div class=\"fz-reviewer\">Chris B. <span>\u2014 Boise, ID</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"My 'Nap Champion' shirt has started more conversations than my entire personality. Worth every penny.\"</p><div class=\"fz-reviewer\">Ashley R. <span>\u2014 Phoenix, AZ</span></div></div>\n  </div>\n</div>",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "marquee_fz",
     "product_list_fa6P9H",
+    "trust_fz",
+    "about_fz",
+    "testimonials_fz",
     "why_us_fz"
   ]
 }

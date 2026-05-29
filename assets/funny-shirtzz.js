@@ -85,116 +85,219 @@
     if (!tryFix()) setTimeout(tryFix, 500);
   }
 
-  /* ---- Rebuild the hero to match the mockup ---- */
+  /* ---- Animated flying shirts canvas ---- */
+  function launchFlyingShirts(container) {
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;';
+    container.appendChild(canvas);
+
+    function resize() {
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const ctx = canvas.getContext('2d');
+    const COLORS = ['#FF6B35','#FF8C5A','#F5F0E8','#A8A09A','#FF4500'];
+
+    // Draw a shirt shape
+    function drawShirt(ctx, x, y, size, color, alpha, rotation) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      ctx.scale(size / 24, size / 24);
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      // Shirt path: M16 2l-2 3H10L8 2 3 6v6l3 1v9h12v-9l3-1V6z
+      ctx.moveTo(16-12, 2-12); ctx.lineTo(14-12, 5-12);
+      ctx.lineTo(10-12, 5-12); ctx.lineTo(8-12, 2-12);
+      ctx.lineTo(3-12, 6-12); ctx.lineTo(3-12, 12-12);
+      ctx.lineTo(6-12, 13-12); ctx.lineTo(6-12, 22-12);
+      ctx.lineTo(18-12, 22-12); ctx.lineTo(18-12, 13-12);
+      ctx.lineTo(21-12, 12-12); ctx.lineTo(21-12, 6-12);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Draw a star
+    function drawStar(ctx, x, y, size, color, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      for (let i = 0; i < 5; i++) {
+        const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2;
+        const ox = x + size * Math.cos(angle);
+        const oy = y + size * Math.sin(angle);
+        i === 0 ? ctx.moveTo(ox, oy) : ctx.lineTo(ox, oy);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Create particles
+    const particles = [];
+    function spawnParticle() {
+      const isShirt = Math.random() > 0.3;
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height + 60,
+        size: isShirt ? (30 + Math.random() * 50) : (8 + Math.random() * 16),
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        alpha: 0.15 + Math.random() * 0.55,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: -(0.6 + Math.random() * 1.4),
+        rotation: Math.random() * Math.PI * 2,
+        vr: (Math.random() - 0.5) * 0.04,
+        isShirt,
+        wobble: Math.random() * Math.PI * 2,
+        wobbleSpeed: 0.02 + Math.random() * 0.03,
+      });
+    }
+
+    // Spawn initial batch
+    for (let i = 0; i < 18; i++) {
+      spawnParticle();
+      particles[i].y = Math.random() * canvas.height;
+    }
+
+    let lastSpawn = 0;
+    function animate(ts) {
+      if (ts - lastSpawn > 1200) { spawnParticle(); lastSpawn = ts; }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.wobble += p.wobbleSpeed;
+        p.x += p.vx + Math.sin(p.wobble) * 0.5;
+        p.y += p.vy;
+        p.rotation += p.vr;
+
+        if (p.y < -80) { particles.splice(i, 1); continue; }
+
+        if (p.isShirt) drawShirt(ctx, p.x, p.y, p.size, p.color, p.alpha, p.rotation);
+        else drawStar(ctx, p.x, p.y, p.size / 2, p.color, p.alpha);
+      }
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }
+
+  /* ---- Rebuild the hero ---- */
   function buildHero() {
-    // The hero is the FIRST section inside #MainContent
     const mainContent = document.getElementById('MainContent') || document.querySelector('main');
     if (!mainContent) return;
     const heroSection = mainContent.querySelector('.shopify-section:first-child, .shopify-section:first-of-type');
-    if (!heroSection || heroSection.querySelector('.fz-hero-built')) return;
-    heroSection.querySelector('.fz-hero-built'); // guard
+    if (!heroSection || heroSection.dataset.fzBuilt) return;
+    heroSection.dataset.fzBuilt = '1';
 
-    // Force hero background
     heroSection.style.cssText = `
-      position:relative;
-      min-height:88vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,107,53,.15), transparent 45%),
-        radial-gradient(circle at 80% 70%, rgba(44,44,46,.9), transparent 50%),
-        linear-gradient(160deg,#1C1C1E,#2C2C2E) !important;
+      position:relative;min-height:92vh;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      background:linear-gradient(145deg,#141416 0%,#1C1C1E 40%,#242426 100%);
       overflow:hidden;
     `;
 
-    // Hide existing Shopify hero content (image, existing text blocks)
+    // Hide existing Shopify content
     heroSection.querySelectorAll('*').forEach(el => {
       if (!el.closest('.fz-hero-inject')) el.style.display = 'none';
     });
 
-    // Build our hero content
+    // Launch animated shirts canvas
+    launchFlyingShirts(heroSection);
+
+    // Subtle radial glow
+    const glow = document.createElement('div');
+    glow.style.cssText = `
+      position:absolute;inset:0;pointer-events:none;z-index:1;
+      background:radial-gradient(ellipse at 50% 60%, rgba(255,107,53,.1) 0%, transparent 65%);
+    `;
+    heroSection.appendChild(glow);
+
     const inject = document.createElement('div');
     inject.className = 'fz-hero-inject';
     inject.style.cssText = `
-      position:relative;z-index:2;
+      position:relative;z-index:3;
       display:flex;flex-direction:column;
       align-items:center;justify-content:center;
-      text-align:center;padding:60px 20px;
-      width:100%;
+      text-align:center;padding:80px 20px;width:100%;
     `;
 
     inject.innerHTML = `
       <div class="fz-hero-tag" style="
         display:inline-block;
-        background:rgba(253,195,8,.15);
-        border:1px solid #FDC308;
-        color:#FCD55A;
-        padding:7px 20px;border-radius:30px;
-        font-weight:800;font-size:.8rem;
-        letter-spacing:1px;text-transform:uppercase;
-        margin-bottom:18px;
-        animation:fz-pop-in .8s ease both;
+        background:rgba(255,107,53,.12);
+        border:1px solid rgba(255,107,53,.5);
+        color:#FF8C5A;padding:7px 20px;border-radius:30px;
+        font-weight:800;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;
+        margin-bottom:24px;animation:fz-pop-in .8s .2s ease both;
         font-family:'Nunito',sans-serif;
-      ">Custom Tees • Printed Fresh • Shipped Fast</div>
+      ">Custom Tees • Printed Fresh • Shipped Fast from Boise, ID</div>
 
-      <div style="width:min(680px,92vw);margin:0 auto 8px;">
-        <svg viewBox="0 0 680 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+      <div style="width:min(720px,94vw);margin:0 auto 10px;animation:fz-pop-in .9s .1s ease both;">
+        <svg viewBox="0 0 720 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
           <defs>
-            <filter id="fur" x="-20%" y="-20%" width="140%" height="140%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/>
-              <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+            <filter id="fur2" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
             </filter>
+            <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#FF6B35"/>
+              <stop offset="50%" style="stop-color:#F5F0E8"/>
+              <stop offset="100%" style="stop-color:#FF6B35"/>
+            </linearGradient>
           </defs>
-          <text x="50%" y="75%" text-anchor="middle" font-size="88"
+          <text x="50%" y="76%" text-anchor="middle" font-size="90"
             font-family="Fredoka, sans-serif" font-weight="700"
-            fill="#FDF502" filter="url(#fur)">Funny Shirtz</text>
+            fill="url(#titleGrad)" filter="url(#fur2)">Funny Shirtz</text>
         </svg>
       </div>
 
       <p style="
-        max-width:560px;font-size:1.15rem;
-        color:#cdd2ff;margin-bottom:30px;line-height:1.6;
+        max-width:520px;font-size:1.12rem;color:#A8A09A;
+        margin-bottom:36px;line-height:1.7;
         font-family:'Nunito',sans-serif;
+        animation:fz-pop-in 1s .3s ease both;
       ">Wearable jokes that actually land. Bold designs, soft cotton, zero seriousness allowed.</p>
 
-      <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+      <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fz-pop-in 1s .4s ease both;">
         <a class="fz-btn-primary" href="/collections/all" style="
           background:#FF6B35;color:#ffffff;
-          padding:16px 36px;border-radius:40px;
+          padding:15px 38px;border-radius:40px;
           font-weight:800;font-size:1.05rem;
           text-decoration:none;
-          box-shadow:0 8px 24px rgba(255,107,53,.35);
-          transition:background .25s,transform .25s,box-shadow .25s;
-          font-family:'Nunito',sans-serif;
-          display:inline-block;cursor:pointer;
-        ">Shop the Drop</a>
-
+          box-shadow:0 8px 28px rgba(255,107,53,.4);
+          transition:background .2s,transform .2s,box-shadow .2s;
+          font-family:'Nunito',sans-serif;display:inline-block;
+        ">Shop the Drop 👕</a>
         <a class="fz-btn-ghost" href="/collections/all" style="
-          background:transparent;color:#F5F0E8;
-          padding:16px 32px;border-radius:40px;
+          background:rgba(255,255,255,.05);color:#F5F0E8;
+          padding:15px 34px;border-radius:40px;
           font-weight:800;font-size:1.05rem;
-          border:2px solid rgba(245,240,232,.4);
-          text-decoration:none;transition:border-color .25s,color .25s;
-          font-family:'Nunito',sans-serif;
-          display:inline-block;cursor:pointer;
+          border:1.5px solid rgba(245,240,232,.25);
+          text-decoration:none;transition:border-color .2s,color .2s,background .2s;
+          font-family:'Nunito',sans-serif;display:inline-block;
         ">Browse Collections</a>
+      </div>
+
+      <div style="
+        display:flex;gap:28px;margin-top:44px;flex-wrap:wrap;justify-content:center;
+        font-family:'Nunito',sans-serif;font-size:.85rem;color:#6B6560;
+        animation:fz-pop-in 1s .6s ease both;
+      ">
+        <span>✓ Free shipping over $50</span>
+        <span>✓ 30-day returns</span>
+        <span>✓ Ships in 2 days</span>
+        <span>✓ 100+ designs</span>
       </div>
     `;
 
     heroSection.appendChild(inject);
-    heroSection.dataset.fzBuilt = '1';
-
-    // Add floating elements
-    buildFloaties(heroSection, [
-      { svg: SHIRT,   top:'12%',  left:'8%',   dur:'8s',  anim:'fz-float',     opacity:.85 },
-      { svg: STAR,    top:'65%',  left:'14%',  dur:'10s', anim:'fz-float-alt', opacity:.85 },
-      { svg: SMILEY,  top:'20%',  right:'10%', dur:'11s', anim:'fz-float',     opacity:.85 },
-      { svg: SHIRT_Y, top:'72%',  right:'16%', dur:'9s',  anim:'fz-float-alt', opacity:.85 },
-      { svg: STAR_SM, top:'42%',  left:'48%',  dur:'7s',  anim:'fz-float',     opacity:.45 },
-      { svg: BOLT,    top:'55%',  right:'5%',  dur:'6s',  anim:'fz-float-alt', opacity:.5  },
-    ]);
   }
 
   /* ---- Add floaties to other sections ---- */
