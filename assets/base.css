@@ -4215,37 +4215,19 @@ product-recommendations:has([data-has-recommendations='false']) {
 }
 
 /* Custom header colors: yellow background, blue text/icons */
-.header-section .header__row,
-.header-section .header__row--top,
-.header-section .header__row--bottom {
+.header-section,
+.header-section [class*='color-'] {
+  --color-background: rgb(255, 215, 0) !important;
+  --color-foreground: rgb(0, 56, 153) !important;
+  --color-foreground-heading: rgb(0, 56, 153) !important;
+  --color-background-rgb: 255, 215, 0 !important;
+  --color-foreground-rgb: 0, 56, 153 !important;
   background-color: #FFD700 !important;
-  --color-background: 255, 215, 0;
-  --color-foreground: 0, 56, 168;
-  --color-base-text: 0, 56, 168;
-}
-
-.header-section a,
-.header-section button,
-.header-section .header__logo,
-.header-section svg {
   color: #003899 !important;
+}
+
+.header-section svg,
+.header-section path {
   fill: #003899 !important;
-}
-
-/* Custom header colors: yellow background, blue text/icons */
-.header-section .header__row,
-.header-section .header__row--top,
-.header-section .header__row--bottom {
-  background-color: #FFD700 !important;
-  --color-background: 255, 215, 0;
-  --color-foreground: 0, 56, 168;
-  --color-base-text: 0, 56, 168;
-}
-
-.header-section a,
-.header-section button,
-.header-section .header__logo,
-.header-section svg {
   color: #003899 !important;
-  fill: #003899 !important;
 }
