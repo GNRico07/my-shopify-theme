@@ -3,177 +3,84 @@
     <div class="fz-about-text">
       <div class="fz-about-eyebrow">Our Story</div>
       <h2 class="fz-about-title">About <span>Funny Shirtz</span></h2>
-      <p>We started Funny Shirtz because we got tired of wearing the same boring tees everyone else had. Based in Boise, Idaho, we design and print every shirt with one goal: make someone laugh.</p>
-      <p>From office humor to pop culture, we create wearable jokes that actually land. Every design is original, every shirt is printed on premium soft cotton, and every order is packed with care right here in the Treasure Valley.</p>
-      <p>Whether you're shopping for yourself or hunting for the perfect gift — you're in the right place. Life's too short for boring clothes.</p>
+      <p>We believe the world should be a place of comfort — where every person feels free to have fun, laugh out loud, and express themselves exactly the way they want and should. No judgment, no dress code, just good vibes and great tees.</p>
+      <p>Funny Shirtz was built on that idea. Based in Boise, Idaho, we design original shirts that let you wear your personality. Whether you're loud, quiet, weird, or wonderfully sarcastic — there's a shirt here for you.</p>
+      <p>Every month we drop brand new designs so there's always something fresh. Subscribe below to get first access before each drop goes live.</p>
       <div class="fz-about-stats">
         <div class="fz-stat"><span class="fz-stat-num">100%</span><span class="fz-stat-label">Original Designs</span></div>
-        <div class="fz-stat"><span class="fz-stat-num">😂</span><span class="fz-stat-label">Guaranteed Laughs</span></div>
-        <div class="fz-stat"><span class="fz-stat-num">🇺🇸</span><span class="fz-stat-label">Made in Boise, ID</span></div>
+        <div class="fz-stat"><span class="fz-stat-num">🗓️</span><span class="fz-stat-label">Monthly Drops</span></div>
+        <div class="fz-stat"><span class="fz-stat-num">🇺🇸</span><span class="fz-stat-label">Boise, Idaho</span></div>
       </div>
-      <a href="/collections/all" class="fz-about-btn">Shop Our Story 👕</a>
+      <a href="/collections/all" class="fz-about-btn">Shop the Current Drop 👕</a>
     </div>
     <div class="fz-about-visual">
-      <div class="fz-about-card fz-about-card--1">
+      <div class="fz-about-card">
         <div class="fz-shirt-preview">👕</div>
-        <p>"Nap Champion"</p>
+        <p>"Be Yourself"</p>
       </div>
-      <div class="fz-about-card fz-about-card--2">
+      <div class="fz-about-card">
         <div class="fz-shirt-preview">👕</div>
-        <p>"Error 404 Mood"</p>
+        <p>"Monthly Drop"</p>
       </div>
-      <div class="fz-about-card fz-about-card--3">
+      <div class="fz-about-card fz-about-card--wide">
         <div class="fz-shirt-preview">👕</div>
-        <p>"Professional Overthinker"</p>
+        <p>"Express Everything"</p>
       </div>
-      <div class="fz-about-location">📍 Boise, Idaho</div>
+      <div class="fz-about-location">📍 Boise, Idaho — Making people laugh since 2026</div>
     </div>
   </div>
 </div>
 
+<div class="fz-custom">
+  <div class="fz-custom-inner">
+    <div class="fz-custom-icon">✏️</div>
+    <div class="fz-custom-eyebrow">Custom Orders</div>
+    <h2 class="fz-custom-title">Got Your Own Design? <span>Let's Make It.</span></h2>
+    <p class="fz-custom-desc">Have an idea, a logo, a meme, or something that just needs to be on a shirt? Send it our way and we'll bring it to life. Custom tees for individuals, groups, events, businesses — you name it.</p>
+    <a href="mailto:griconac@gmail.com?subject=Custom Design Request" class="fz-custom-btn">📧 Email Us Your Design</a>
+    <p class="fz-custom-note">Send to <strong>griconac@gmail.com</strong> — we reply fast and keep it simple.</p>
+  </div>
+</div>
+
 {% stylesheet %}
-.fz-about {
-  padding: 80px 24px;
-  background: linear-gradient(160deg, #1C1C1E 0%, #242426 100%);
-  position: relative;
-  overflow: hidden;
-}
-.fz-about::before {
-  content: '';
-  position: absolute;
-  top: -100px; right: -100px;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(255,107,53,.08), transparent 70%);
-  pointer-events: none;
-}
-.fz-about-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-.fz-about-eyebrow {
-  display: inline-block;
-  background: rgba(255,107,53,.12);
-  border: 1px solid rgba(255,107,53,.4);
-  color: #FF8C5A;
-  padding: 5px 16px;
-  border-radius: 30px;
-  font-weight: 800;
-  font-size: .72rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  font-family: 'Nunito', sans-serif;
-  margin-bottom: 16px;
-}
-.fz-about-title {
-  font-family: 'Fredoka', sans-serif !important;
-  font-size: 2.6rem;
-  color: #F5F0E8 !important;
-  margin-bottom: 20px;
-  line-height: 1.1;
-}
-.fz-about-title span { color: #FF6B35 !important; }
-.fz-about-text p {
-  color: #A8A09A;
-  font-family: 'Nunito', sans-serif;
-  font-size: .98rem;
-  line-height: 1.75;
-  margin-bottom: 14px;
-}
-.fz-about-stats {
-  display: flex;
-  gap: 24px;
-  margin: 28px 0;
-  flex-wrap: wrap;
-}
-.fz-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.fz-stat-num {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 1.6rem;
-  color: #FF6B35;
-  font-weight: 700;
-}
-.fz-stat-label {
-  font-family: 'Nunito', sans-serif;
-  font-size: .78rem;
-  color: #6B6560;
-  text-transform: uppercase;
-  letter-spacing: .8px;
-}
-.fz-about-btn {
-  display: inline-block;
-  background: #FF6B35;
-  color: #fff;
-  padding: 14px 32px;
-  border-radius: 40px;
-  font-weight: 800;
-  font-size: 1rem;
-  text-decoration: none;
-  font-family: 'Nunito', sans-serif;
-  box-shadow: 0 8px 24px rgba(255,107,53,.3);
-  transition: background .2s, transform .2s;
-  margin-top: 8px;
-}
-.fz-about-btn:hover {
-  background: #FF8C5A;
-  transform: translateY(-2px);
-  color: #fff;
-}
-.fz-about-visual {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-.fz-about-card {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,107,53,.18);
-  border-radius: 16px;
-  padding: 24px 16px;
-  text-align: center;
-  transition: transform .3s, border-color .3s;
-}
-.fz-about-card:hover {
-  transform: translateY(-6px);
-  border-color: #FF6B35;
-}
-.fz-about-card--3 {
-  grid-column: 1 / -1;
-}
-.fz-shirt-preview {
-  font-size: 3rem;
-  margin-bottom: 10px;
-}
-.fz-about-card p {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 1rem;
-  color: #F5F0E8;
-  margin: 0;
-}
-.fz-about-location {
-  grid-column: 1 / -1;
-  text-align: center;
-  font-family: 'Nunito', sans-serif;
-  font-size: .85rem;
-  color: #6B6560;
-  padding: 8px;
-}
-@media (max-width: 760px) {
-  .fz-about-inner { grid-template-columns: 1fr; gap: 40px; }
-  .fz-about-title { font-size: 2rem; }
+.fz-about{padding:80px 24px;background:linear-gradient(160deg,#1C1C1E 0%,#242426 100%);position:relative;overflow:hidden;}
+.fz-about::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,107,53,.07),transparent 70%);pointer-events:none;}
+.fz-about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.fz-about-eyebrow{display:inline-block;background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.4);color:#FF8C5A;padding:5px 16px;border-radius:30px;font-weight:800;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;font-family:'Nunito',sans-serif;margin-bottom:16px;}
+.fz-about-title{font-family:'Fredoka',sans-serif!important;font-size:2.6rem;color:#F5F0E8!important;margin-bottom:20px;line-height:1.1;}
+.fz-about-title span{color:#FF6B35!important;}
+.fz-about-text p{color:#A8A09A;font-family:'Nunito',sans-serif;font-size:.98rem;line-height:1.8;margin-bottom:14px;}
+.fz-about-stats{display:flex;gap:24px;margin:28px 0;flex-wrap:wrap;}
+.fz-stat{display:flex;flex-direction:column;gap:4px;}
+.fz-stat-num{font-family:'Fredoka',sans-serif;font-size:1.6rem;color:#FF6B35;font-weight:700;}
+.fz-stat-label{font-family:'Nunito',sans-serif;font-size:.78rem;color:#6B6560;text-transform:uppercase;letter-spacing:.8px;}
+.fz-about-btn{display:inline-block;background:#FF6B35;color:#fff;padding:14px 32px;border-radius:40px;font-weight:800;font-size:1rem;text-decoration:none;font-family:'Nunito',sans-serif;box-shadow:0 8px 24px rgba(255,107,53,.3);transition:background .2s,transform .2s;margin-top:8px;}
+.fz-about-btn:hover{background:#FF8C5A;transform:translateY(-2px);color:#fff;}
+.fz-about-visual{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fz-about-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,107,53,.18);border-radius:16px;padding:24px 16px;text-align:center;transition:transform .3s,border-color .3s;}
+.fz-about-card:hover{transform:translateY(-6px);border-color:#FF6B35;}
+.fz-about-card--wide{grid-column:1/-1;}
+.fz-shirt-preview{font-size:3rem;margin-bottom:10px;}
+.fz-about-card p{font-family:'Fredoka',sans-serif;font-size:1rem;color:#F5F0E8;margin:0;}
+.fz-about-location{grid-column:1/-1;text-align:center;font-family:'Nunito',sans-serif;font-size:.85rem;color:#6B6560;padding:8px;}
+.fz-custom{padding:72px 24px;background:#141416;border-top:1px solid rgba(255,107,53,.12);border-bottom:1px solid rgba(255,107,53,.12);text-align:center;}
+.fz-custom-inner{max-width:680px;margin:0 auto;}
+.fz-custom-icon{font-size:2.8rem;margin-bottom:12px;}
+.fz-custom-eyebrow{display:inline-block;background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.4);color:#FF8C5A;padding:5px 16px;border-radius:30px;font-weight:800;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;font-family:'Nunito',sans-serif;margin-bottom:16px;}
+.fz-custom-title{font-family:'Fredoka',sans-serif!important;font-size:2.4rem;color:#F5F0E8!important;margin-bottom:14px;line-height:1.15;}
+.fz-custom-title span{color:#FF6B35!important;}
+.fz-custom-desc{font-family:'Nunito',sans-serif;font-size:1rem;color:#A8A09A;line-height:1.75;margin-bottom:32px;}
+.fz-custom-btn{display:inline-block;background:#FF6B35;color:#fff;padding:16px 40px;border-radius:40px;font-weight:800;font-size:1.05rem;text-decoration:none;font-family:'Nunito',sans-serif;box-shadow:0 8px 28px rgba(255,107,53,.35);transition:background .2s,transform .2s;margin-bottom:18px;}
+.fz-custom-btn:hover{background:#FF8C5A;transform:translateY(-3px);color:#fff;}
+.fz-custom-note{font-family:'Nunito',sans-serif;font-size:.88rem;color:#6B6560;}
+.fz-custom-note strong{color:#FF8C5A;}
+@media(max-width:760px){
+  .fz-about-inner{grid-template-columns:1fr;gap:40px;}
+  .fz-about-title{font-size:2rem;}
+  .fz-custom-title{font-size:1.9rem;}
 }
 {% endstylesheet %}
 
 {% schema %}
-{
-  "name": "About Us",
-  "settings": []
-}
+{"name":"About Us","settings":[]}
 {% endschema %}
