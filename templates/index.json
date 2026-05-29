@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "hero_jVaWmY": {
       "type": "hero",
@@ -15,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Wear the Laugh \ud83d\ude02</p>",
+            "text": "<p>Wear the Laugh 😂</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -65,6 +66,7 @@
         "custom_mobile_media": false,
         "media_type_1_mobile": "image",
         "media_type_2_mobile": "image",
+        "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -282,193 +284,53 @@
         "padding-block-end": 48
       }
     },
-    "marquee_fz": {
-      "type": "marquee",
+    "1780076281eb2963d9": {
+      "type": "_blocks",
       "blocks": {
-        "text_1": {
-          "type": "_marquee-text",
+        "printify_print_on_demand_personalize_button_DPw9ET": {
+          "type": "shopify://apps/printify-print-on-demand/blocks/personalize_button/019a5dbe-775d-7320-afec-36b77e3421a0",
           "settings": {
-            "text": "\ud83d\ude02 Funny Shirtz",
-            "type_preset": "h4"
-          }
-        },
-        "text_2": {
-          "type": "_marquee-text",
-          "settings": {
-            "text": "\ud83d\udc55 Wear the Joke",
-            "type_preset": "h4"
-          }
-        },
-        "text_3": {
-          "type": "_marquee-text",
-          "settings": {
-            "text": "\ud83d\udd25 Fresh Drops Daily",
-            "type_preset": "h4"
-          }
-        },
-        "text_4": {
-          "type": "_marquee-text",
-          "settings": {
-            "text": "\u2728 Soft Cotton Tees",
-            "type_preset": "h4"
-          }
-        },
-        "text_5": {
-          "type": "_marquee-text",
-          "settings": {
-            "text": "\ud83d\ude1c Zero Seriousness",
-            "type_preset": "h4"
+            "use_default_theme_style": true,
+            "button_text": "Add personalized design",
+            "button_text_with_personalization": "Remove saved design",
+            "button_extra_classes": "product-form__buttons button--full-width",
+            "button_extra_classes_with_personalization": "product-form__buttons button--full-width button--secondary",
+            "button_color": "#007bff",
+            "text_color": "#ffffff",
+            "button_padding": "12px 24px",
+            "font_size": "16px",
+            "border_radius": "4px",
+            "modal_title": "Personalize Your Product"
           }
         }
       },
       "block_order": [
-        "text_1",
-        "text_2",
-        "text_3",
-        "text_4",
-        "text_5"
+        "printify_print_on_demand_personalize_button_DPw9ET"
       ],
-      "name": "Marquee",
       "settings": {
-        "speed": 30,
-        "pause_on_hover": true,
-        "color_scheme": "scheme-5",
-        "padding-block-start": 16,
-        "padding-block-end": 16
-      }
-    },
-    "why_us_fz": {
-      "type": "media-with-content",
-      "blocks": {
-        "text_why": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>Why Funny Shirtz?</h2><p>Because life's too short for boring clothes. We print bold, funny, conversation-starting tees on premium soft cotton \u2014 shipped fast, designed to make people actually laugh out loud.</p>",
-            "type_preset": "rte"
-          }
-        },
-        "feat_1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>\u2705 <strong>Premium soft cotton</strong> \u2014 feels as good as the joke lands</p>",
-            "type_preset": "rte"
-          }
-        },
-        "feat_2": {
-          "type": "text",
-          "settings": {
-            "text": "<p>\ud83d\ude9a <strong>Fast shipping</strong> \u2014 from our shop to your door in days</p>",
-            "type_preset": "rte"
-          }
-        },
-        "feat_3": {
-          "type": "text",
-          "settings": {
-            "text": "<p>\ud83d\ude02 <strong>100+ original designs</strong> \u2014 new drops every week</p>",
-            "type_preset": "rte"
-          }
-        },
-        "feat_4": {
-          "type": "text",
-          "settings": {
-            "text": "<p>\u21a9\ufe0f <strong>Easy returns</strong> \u2014 if it doesn't fit, we make it right</p>",
-            "type_preset": "rte"
-          }
-        },
-        "btn_why": {
-          "type": "button",
-          "settings": {
-            "label": "Shop All Tees",
-            "link": "shopify://collections/all",
-            "style_class": "button-primary"
-          }
-        }
-      },
-      "block_order": [
-        "text_why",
-        "feat_1",
-        "feat_2",
-        "feat_3",
-        "feat_4",
-        "btn_why"
-      ],
-      "name": "Why Us",
-      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
         "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 80,
-        "padding-block-end": 80
-      }
-    },
-    "about_fz": {
-      "type": "media-with-content",
-      "blocks": {
-        "about_text": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>About Funny Shirtz</h2><p>We started Funny Shirtz because we got tired of wearing the same boring tees everyone else had. Based in Boise, Idaho, we design and print every shirt with one goal: make someone laugh.</p><p>From office humor to pop culture, we create wearable jokes that actually land. Every design is original, every shirt is printed on premium soft cotton, and every order is packed with care right here in the Treasure Valley.</p><p>Whether you're shopping for yourself or hunting for the perfect gift, you're in the right place. Life's too short for boring clothes.</p>",
-            "type_preset": "rte",
-            "width": "fill",
-            "max_width": "normal",
-            "alignment": "left",
-            "font": "var(--font-body--family)",
-            "color": "var(--color-foreground)",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "about_btn": {
-          "type": "button",
-          "settings": {
-            "label": "Shop Our Story",
-            "link": "shopify://collections/all",
-            "style_class": "button-primary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "about_text",
-        "about_btn"
-      ],
-      "name": "About Us",
-      "settings": {
-        "section_width": "page-width",
-        "color_scheme": "scheme-2",
-        "padding-block-start": 80,
-        "padding-block-end": 80
-      }
-    },
-    "trust_fz": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<style>\n.fz-trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:1100px;margin:0 auto;padding:60px 24px;text-align:center;}\n.fz-trust-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,107,53,.15);border-radius:16px;padding:28px 20px;}\n.fz-trust-item .icon{font-size:2.2rem;margin-bottom:12px;}\n.fz-trust-item h4{font-family:'Fredoka',sans-serif;font-size:1.15rem;color:#F5F0E8;margin-bottom:8px;}\n.fz-trust-item p{font-size:.9rem;color:#A8A09A;line-height:1.5;}\n.fz-trust-title{text-align:center;padding:48px 24px 0;font-family:'Fredoka',sans-serif;font-size:2.2rem;color:#F5F0E8;}\n.fz-trust-title span{color:#FF6B35;}\n</style>\n<h2 class=\"fz-trust-title\">Why People <span>Love Us</span></h2>\n<div class=\"fz-trust\">\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83d\udc55</div><h4>Premium Cotton</h4><p>Super soft, pre-shrunk fabric that holds color wash after wash.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83c\udfa8</div><h4>Original Designs</h4><p>100+ exclusive designs \u2014 no recycled clip art, ever.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83d\ude9a</div><h4>Fast Shipping</h4><p>Orders ship within 2 business days right from Boise, Idaho.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\u21a9\ufe0f</div><h4>Easy Returns</h4><p>Not the right fit? No drama. Free returns within 30 days.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83d\ude02</div><h4>Guaranteed Laughs</h4><p>If your shirt doesn't get at least one laugh, we'll be very surprised.</p></div>\n  <div class=\"fz-trust-item\"><div class=\"icon\">\ud83e\udd1d</div><h4>Real Support</h4><p>Email us anytime at griconac@gmail.com \u2014 we actually reply.</p></div>\n</div>",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 0,
-        "padding-block-end": 48
-      }
-    },
-    "testimonials_fz": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<style>\n.fz-testimonials{max-width:1100px;margin:0 auto;padding:60px 24px;}\n.fz-testimonials h2{text-align:center;font-family:'Fredoka',sans-serif;font-size:2.2rem;color:#F5F0E8;margin-bottom:40px;}\n.fz-testimonials h2 span{color:#FF6B35;}\n.fz-reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}\n.fz-review{background:rgba(255,255,255,.04);border:1px solid rgba(255,107,53,.15);border-radius:16px;padding:24px;}\n.fz-stars{color:#FF6B35;font-size:1.1rem;margin-bottom:10px;}\n.fz-review p{color:#C4BBAF;font-size:.95rem;line-height:1.6;margin-bottom:14px;}\n.fz-reviewer{font-weight:800;color:#F5F0E8;font-size:.9rem;}\n.fz-reviewer span{color:#A8A09A;font-weight:400;}\n</style>\n<div class=\"fz-testimonials\">\n  <h2>What Customers <span>Are Saying</span></h2>\n  <div class=\"fz-reviews\">\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"Ordered the 'Professional Overthinker' tee and my coworkers immediately called me out. Best shirt I own.\"</p><div class=\"fz-reviewer\">Sarah M. <span>\u2014 Portland, OR</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"Super soft cotton, great fit, and the print hasn't faded after a dozen washes. Funny AND quality? Rare combo.\"</p><div class=\"fz-reviewer\">Jake T. <span>\u2014 Denver, CO</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"Bought 3 shirts as gifts. Everyone lost it when they opened them. Fast shipping too \u2014 arrived in 3 days.\"</p><div class=\"fz-reviewer\">Maria L. <span>\u2014 Austin, TX</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"The 'Error 404 Mood' shirt is my personality in fabric form. 10/10 would buy again.\"</p><div class=\"fz-reviewer\">Dev P. <span>\u2014 Seattle, WA</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"Customer service was amazing. Had an issue with sizing and they sorted it same day. Real humans, not bots.\"</p><div class=\"fz-reviewer\">Chris B. <span>\u2014 Boise, ID</span></div></div>\n    <div class=\"fz-review\"><div class=\"fz-stars\">\u2605\u2605\u2605\u2605\u2605</div><p>\"My 'Nap Champion' shirt has started more conversations than my entire personality. Worth every penny.\"</p><div class=\"fz-reviewer\">Ashley R. <span>\u2014 Phoenix, AZ</span></div></div>\n  </div>\n</div>",
-        "color_scheme": "scheme-2",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "countdown_fz": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<style>\n.fz-drop{\n  text-align:center;padding:72px 24px;\n  background:linear-gradient(135deg,#1C1C1E 0%,#242426 50%,#1C1C1E 100%);\n  position:relative;overflow:hidden;\n}\n.fz-drop::before{\n  content:'';position:absolute;inset:0;\n  background:radial-gradient(ellipse at 50% 50%, rgba(255,107,53,.08) 0%, transparent 70%);\n  pointer-events:none;\n}\n.fz-drop-eyebrow{\n  display:inline-block;\n  background:rgba(255,107,53,.12);\n  border:1px solid rgba(255,107,53,.4);\n  color:#FF8C5A;\n  padding:6px 18px;border-radius:30px;\n  font-weight:800;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;\n  font-family:'Nunito',sans-serif;margin-bottom:20px;\n}\n.fz-drop h2{\n  font-family:'Fredoka',sans-serif;font-size:2.4rem;\n  color:#F5F0E8;margin-bottom:8px;\n}\n.fz-drop h2 span{color:#FF6B35;}\n.fz-drop-sub{\n  font-family:'Nunito',sans-serif;font-size:1rem;\n  color:#6B6560;margin-bottom:40px;\n}\n.fz-clock{\n  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;\n}\n.fz-unit{\n  background:rgba(255,255,255,.04);\n  border:1px solid rgba(255,107,53,.2);\n  border-radius:16px;padding:20px 28px;min-width:90px;\n  position:relative;overflow:hidden;\n  transition:border-color .3s;\n}\n.fz-unit:hover{border-color:#FF6B35;}\n.fz-unit-val{\n  font-family:'Fredoka',sans-serif;font-size:3rem;\n  color:#F5F0E8;line-height:1;display:block;\n  transition:transform .15s ease;\n}\n.fz-unit-val.fz-flip{transform:scale(1.15);color:#FF6B35;}\n.fz-unit-label{\n  font-family:'Nunito',sans-serif;font-size:.7rem;\n  color:#6B6560;text-transform:uppercase;letter-spacing:1px;\n  margin-top:6px;display:block;\n}\n.fz-drop-note{\n  font-family:'Nunito',sans-serif;font-size:.85rem;color:#6B6560;\n  margin-top:8px;\n}\n.fz-drop-note span{color:#FF8C5A;font-weight:800;}\n</style>\n\n<div class=\"fz-drop\">\n  <div class=\"fz-drop-eyebrow\">Monthly Drop</div>\n  <h2>Next <span>Fresh Drop</span> Dropping In</h2>\n  <p class=\"fz-drop-sub\">New designs every month \u2014 set a reminder so you don't miss out.</p>\n\n  <div class=\"fz-clock\">\n    <div class=\"fz-unit\"><span class=\"fz-unit-val\" id=\"fzD\">00</span><span class=\"fz-unit-label\">Days</span></div>\n    <div class=\"fz-unit\"><span class=\"fz-unit-val\" id=\"fzH\">00</span><span class=\"fz-unit-label\">Hours</span></div>\n    <div class=\"fz-unit\"><span class=\"fz-unit-val\" id=\"fzM\">00</span><span class=\"fz-unit-label\">Minutes</span></div>\n    <div class=\"fz-unit\"><span class=\"fz-unit-val\" id=\"fzS\">00</span><span class=\"fz-unit-label\">Seconds</span></div>\n  </div>\n\n  <p class=\"fz-drop-note\">Drops on the <span>1st of every month</span> \u2014 subscribe to get first access.</p>\n</div>\n\n<script>\n(function(){\n  function nextDrop(){\n    var now = new Date();\n    var d = new Date(now.getFullYear(), now.getMonth()+1, 1, 0, 0, 0);\n    return d;\n  }\n  function pad(n){return String(n).padStart(2,'0');}\n  function tick(){\n    var diff = nextDrop() - new Date();\n    if(diff <= 0){ diff = 0; }\n    var days  = Math.floor(diff/86400000);\n    var hours = Math.floor((diff%86400000)/3600000);\n    var mins  = Math.floor((diff%3600000)/60000);\n    var secs  = Math.floor((diff%60000)/1000);\n\n    function update(id, val){\n      var el = document.getElementById(id);\n      if(!el) return;\n      var s = pad(val);\n      if(el.textContent !== s){\n        el.textContent = s;\n        el.classList.add('fz-flip');\n        setTimeout(function(){ el.classList.remove('fz-flip'); }, 150);\n      }\n    }\n    update('fzD', days);\n    update('fzH', hours);\n    update('fzM', mins);\n    update('fzS', secs);\n  }\n  tick();\n  setInterval(tick, 1000);\n})();\n</script>",
-        "color_scheme": "scheme-1",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -476,12 +338,7 @@
   },
   "order": [
     "hero_jVaWmY",
-    "marquee_fz",
-    "countdown_fz",
     "product_list_fa6P9H",
-    "trust_fz",
-    "about_fz",
-    "testimonials_fz",
-    "why_us_fz"
+    "1780076281eb2963d9"
   ]
 }
