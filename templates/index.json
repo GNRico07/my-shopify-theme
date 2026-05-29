@@ -42,7 +42,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Shop Funny Shirts",
+            "label": "Shop the Drop",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button-secondary",
@@ -375,6 +375,11 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "custom_design_fz": {
+      "type": "fz-custom-design",
+      "name": "Custom Design Callout",
+      "settings": {}
     }
   },
   "order": [
@@ -382,6 +387,7 @@
     "marquee_fz",
     "countdown_fz",
     "product_list_fa6P9H",
+    "custom_design_fz",
     "about_fz",
     "trust_fz",
     "testimonials_fz",
