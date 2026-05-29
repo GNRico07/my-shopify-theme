@@ -285,16 +285,6 @@
         ">Browse Collections</a>
       </div>
 
-      <div style="
-        display:flex;gap:28px;margin-top:44px;flex-wrap:wrap;justify-content:center;
-        font-family:'Nunito',sans-serif;font-size:.85rem;color:#6B6560;
-        animation:fz-pop-in 1s .6s ease both;
-      ">
-        <span>✓ Free shipping over $50</span>
-        <span>✓ 30-day returns</span>
-        <span>✓ Ships in 2 days</span>
-        <span>✓ 100+ designs</span>
-      </div>
     `;
 
     heroSection.appendChild(inject);

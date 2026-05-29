@@ -463,11 +463,21 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "countdown_fz": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.fz-drop{\n  text-align:center;padding:72px 24px;\n  background:linear-gradient(135deg,#1C1C1E 0%,#242426 50%,#1C1C1E 100%);\n  position:relative;overflow:hidden;\n}\n.fz-drop::before{\n  content:'';position:absolute;inset:0;\n  background:radial-gradient(ellipse at 50% 50%, rgba(255,107,53,.08) 0%, transparent 70%);\n  pointer-events:none;\n}\n.fz-drop-eyebrow{\n  display:inline-block;\n  background:rgba(255,107,53,.12);\n  border:1px solid rgba(255,107,53,.4);\n  color:#FF8C5A;\n  padding:6px 18px;border-radius:30px;\n  font-weight:800;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;\n  font-family:'Nunito',sans-serif;margin-bottom:20px;\n}\n.fz-drop h2{\n  font-family:'Fredoka',sans-serif;font-size:2.4rem;\n  color:#F5F0E8;margin-bottom:8px;\n}\n.fz-drop h2 span{color:#FF6B35;}\n.fz-drop-sub{\n  font-family:'Nunito',sans-serif;font-size:1rem;\n  color:#6B6560;margin-bottom:40px;\n}\n.fz-clock{\n  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;\n}\n.fz-unit{\n  background:rgba(255,255,255,.04);\n  border:1px solid rgba(255,107,53,.2);\n  border-radius:16px;padding:20px 28px;min-width:90px;\n  position:relative;overflow:hidden;\n  transition:border-color .3s;\n}\n.fz-unit:hover{border-color:#FF6B35;}\n.fz-unit-val{\n  font-family:'Fredoka',sans-serif;font-size:3rem;\n  color:#F5F0E8;line-height:1;display:block;\n  transition:transform .15s ease;\n}\n.fz-unit-val.fz-flip{transform:scale(1.15);color:#FF6B35;}\n.fz-unit-label{\n  font-family:'Nunito',sans-serif;font-size:.7rem;\n  color:#6B6560;text-transform:uppercase;letter-spacing:1px;\n  margin-top:6px;display:block;\n}\n.fz-drop-note{\n  font-family:'Nunito',sans-serif;font-size:.85rem;color:#6B6560;\n  margin-top:8px;\n}\n.fz-drop-note span{color:#FF8C5A;font-weight:800;}\n</style>\n\n<div class=\"fz-drop\">\n  <div class=\"fz-drop-eyebrow\">Monthly Drop</div>\n  <h2>Next <span>Fresh Drop</span> Dropping In</h2>\n  <p class=\"fz-drop-sub\">New designs every month \u2014 set a reminder so you don't miss out.</p>\n\n  <div class=\"fz-clock\">\n    <div class=\"fz-unit\"><span class=\"fz-unit-val\" id=\"fzD\">00</span><span class=\"fz-unit-label\">Days</span></div>\n    <div class=\"fz-unit\"><span class=\"fz-unit-val\" id=\"fzH\">00</span><span class=\"fz-unit-label\">Hours</span></div>\n    <div class=\"fz-unit\"><span class=\"fz-unit-val\" id=\"fzM\">00</span><span class=\"fz-unit-label\">Minutes</span></div>\n    <div class=\"fz-unit\"><span class=\"fz-unit-val\" id=\"fzS\">00</span><span class=\"fz-unit-label\">Seconds</span></div>\n  </div>\n\n  <p class=\"fz-drop-note\">Drops on the <span>1st of every month</span> \u2014 subscribe to get first access.</p>\n</div>\n\n<script>\n(function(){\n  function nextDrop(){\n    var now = new Date();\n    var d = new Date(now.getFullYear(), now.getMonth()+1, 1, 0, 0, 0);\n    return d;\n  }\n  function pad(n){return String(n).padStart(2,'0');}\n  function tick(){\n    var diff = nextDrop() - new Date();\n    if(diff <= 0){ diff = 0; }\n    var days  = Math.floor(diff/86400000);\n    var hours = Math.floor((diff%86400000)/3600000);\n    var mins  = Math.floor((diff%3600000)/60000);\n    var secs  = Math.floor((diff%60000)/1000);\n\n    function update(id, val){\n      var el = document.getElementById(id);\n      if(!el) return;\n      var s = pad(val);\n      if(el.textContent !== s){\n        el.textContent = s;\n        el.classList.add('fz-flip');\n        setTimeout(function(){ el.classList.remove('fz-flip'); }, 150);\n      }\n    }\n    update('fzD', days);\n    update('fzH', hours);\n    update('fzM', mins);\n    update('fzS', secs);\n  }\n  tick();\n  setInterval(tick, 1000);\n})();\n</script>",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "marquee_fz",
+    "countdown_fz",
     "product_list_fa6P9H",
     "trust_fz",
     "about_fz",
