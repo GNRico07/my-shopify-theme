@@ -106,7 +106,7 @@
         <div style="position:relative;width:340px;height:340px;">
 
           <!-- Rotating text ring -->
-          <svg id="fz-ring" style="position:absolute;inset:0;width:100%;height:100%;animation:fz-spin 18s linear infinite;" viewBox="0 0 340 340">
+          <svg id="fz-ring" style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 340 340">
             <defs><path id="circle-path" d="M170,170 m-145,0 a145,145 0 1,1 290,0 a145,145 0 1,1 -290,0"/></defs>
             <text font-family="Anton,sans-serif" font-size="13" fill="rgba(245,240,232,0.25)" letter-spacing="8">
               <textPath href="#circle-path">FUNNY SHIRTZ · BOISE IDAHO · WEAR THE LAUGH · MONTHLY DROPS · FUNNY SHIRTZ ·</textPath>
@@ -132,13 +132,39 @@
     `;
     heroSection.appendChild(inject);
 
-    /* Inject spin keyframe */
-    if (!document.getElementById('fz-spin-kf')) {
-      const st = document.createElement('style');
-      st.id = 'fz-spin-kf';
-      st.textContent = '@keyframes fz-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
-      document.head.appendChild(st);
-    }
+    /* Cursor-proximity spin — JS driven, no CSS animation */
+    (function initProximitySpin() {
+      let angle = 0;
+      let speed = 0.3;         // deg per frame at rest
+      const maxSpeed = 6;      // deg per frame when cursor is on top
+      const activationRadius = 260; // px from center to start speeding up
+      let mouseX = -9999, mouseY = -9999;
+
+      document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+      function tick() {
+        const ring = document.getElementById('fz-ring');
+        if (!ring) { requestAnimationFrame(tick); return; }
+
+        const rect = ring.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dist = Math.hypot(mouseX - cx, mouseY - cy);
+
+        // Normalize: 0 = at center, 1 = at activationRadius or beyond
+        const t = Math.max(0, Math.min(1, 1 - dist / activationRadius));
+        const target = speed + (maxSpeed - speed) * t;
+
+        // Ease current speed toward target
+        speed += (target - speed) * 0.08;
+        if (dist > activationRadius + 50) speed += (0.3 - speed) * 0.04; // drift back to slow
+
+        angle = (angle + speed) % 360;
+        ring.style.transform = `rotate(${angle}deg)`;
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
   }
 
   /* ---- GSAP animations ---- */
