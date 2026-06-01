@@ -86,8 +86,9 @@
 
     const inject = document.createElement('div');
     inject.className = 'fz-hero-inject';
+    inject.style.cssText = 'position:relative;z-index:3;width:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:92vh;';
     inject.innerHTML = `
-      <div style="position:relative;z-index:3;padding:80px 60px 80px;width:100%;">
+      <div style="padding:80px 60px 80px;">
         <span class="fz-hero-tag">Boise, Idaho &nbsp;—&nbsp; Wear the Laugh</span>
         <div class="fz-hero-wordmark">
           <span id="fz-w1">FUNNY</span>
@@ -100,8 +101,44 @@
         </div>
         <div style="margin-top:48px;font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.25);" id="fz-scroll-hint">Scroll to explore ↓</div>
       </div>
+
+      <div id="fz-hero-visual" style="display:flex;align-items:center;justify-content:center;height:100%;padding:60px 40px;opacity:0;">
+        <div style="position:relative;width:340px;height:340px;">
+
+          <!-- Rotating text ring -->
+          <svg id="fz-ring" style="position:absolute;inset:0;width:100%;height:100%;animation:fz-spin 18s linear infinite;" viewBox="0 0 340 340">
+            <defs><path id="circle-path" d="M170,170 m-145,0 a145,145 0 1,1 290,0 a145,145 0 1,1 -290,0"/></defs>
+            <text font-family="Anton,sans-serif" font-size="13" fill="rgba(245,240,232,0.25)" letter-spacing="8">
+              <textPath href="#circle-path">FUNNY SHIRTZ · BOISE IDAHO · WEAR THE LAUGH · MONTHLY DROPS · FUNNY SHIRTZ ·</textPath>
+            </text>
+          </svg>
+
+          <!-- Big shirt SVG -->
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <svg width="220" height="220" viewBox="0 0 24 24" style="filter:drop-shadow(0 0 40px rgba(255,32,32,0.3));">
+              <path d="M16 2l-2 3H10L8 2 3 6v6l3 1v9h12v-9l3-1V6z" fill="#FF2020" opacity="0.9"/>
+              <path d="M16 2l-2 3H10L8 2 3 6v6l3 1v9h12v-9l3-1V6z" fill="none" stroke="rgba(245,240,232,0.15)" stroke-width="0.3"/>
+            </svg>
+          </div>
+
+          <!-- Corner accent boxes -->
+          <div style="position:absolute;top:10px;right:10px;width:50px;height:50px;border:2px solid rgba(255,32,32,0.4);"></div>
+          <div style="position:absolute;bottom:10px;left:10px;width:30px;height:30px;background:#FF2020;opacity:0.6;"></div>
+
+          <!-- Drop badge -->
+          <div style="position:absolute;bottom:-10px;right:20px;background:#FF2020;color:#F5F0E8;font-family:'Anton',sans-serif;font-size:0.65rem;letter-spacing:0.12em;padding:8px 14px;text-transform:uppercase;">Monthly Drop</div>
+        </div>
+      </div>
     `;
     heroSection.appendChild(inject);
+
+    /* Inject spin keyframe */
+    if (!document.getElementById('fz-spin-kf')) {
+      const st = document.createElement('style');
+      st.id = 'fz-spin-kf';
+      st.textContent = '@keyframes fz-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+      document.head.appendChild(st);
+    }
   }
 
   /* ---- GSAP animations ---- */
@@ -120,6 +157,9 @@
       gsap.set('#fz-sub', { opacity: 0, y: 20 });
       gsap.set('#fz-cta', { opacity: 0 });
       gsap.set('#fz-scroll-hint', { opacity: 0 });
+      gsap.set('#fz-hero-visual', { opacity: 0, x: 60 });
+
+      tl.to('#fz-hero-visual', { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, 0.3);
 
       /* Re-run timeline after sets */
       setTimeout(() => tl.restart(), 50);
