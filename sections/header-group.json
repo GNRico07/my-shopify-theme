@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "New Drop Every Month \u2014 Boise, Idaho",
+            "text": "New Drop Every Month — Boise, Idaho",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -50,9 +50,7 @@
           "settings": {
             "hide_logo_on_home_page": false,
             "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-end": 0
           },
           "blocks": {}
         },
@@ -79,10 +77,12 @@
           "blocks": {}
         }
       },
+      "disabled": true,
       "settings": {
         "logo_position": "left",
         "menu_position": "left",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -99,6 +99,10 @@
         "divider_width": 0,
         "divider_size": "page-width",
         "border_width": 0,
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
         "color_scheme_top": "scheme-1",
         "color_scheme_bottom": "scheme-1",
         "color_scheme_transparent": "scheme-6",
@@ -109,10 +113,26 @@
         "enable_transparent_header_collection": false,
         "collection_color_scheme": "default"
       }
+    },
+    "lr_header_rndEkW": {
+      "type": "lr-header",
+      "name": "LR Header",
+      "settings": {
+        "wordmark_1": "LOUD",
+        "wordmark_2": "RAG",
+        "menu": "main-menu",
+        "show_search": true,
+        "show_account": true,
+        "show_announcement": true,
+        "announcement_text": "New drop the 1st of every month, Free shipping over $60, Printed in Boise Idaho, Custom orders welcome",
+        "email": "510ricogn@gmail.com",
+        "drawer_note": "Boise, Idaho — Wear the Laugh"
+      }
     }
   },
   "order": [
     "header_announcements_9jGBFp",
+    "lr_header_rndEkW",
     "header_section"
   ]
 }
