@@ -1,12 +1,46 @@
 {%- comment -%}
   LOUD RAG — Hero
-  [REPLACE] All copy is editable in the theme editor under this section's settings.
+  All copy editable in the theme editor under this section's settings.
 {%- endcomment -%}
 
 <section class="lr-hero" id="lr-hero">
-  <div class="lr-hero-halftone"></div>
+
+  {%- comment -%} Layer 1 — texture {%- endcomment -%}
+  <div class="lr-hero-halftone" data-par="0.05"></div>
   <div class="lr-hero-slab"></div>
 
+  {%- comment -%} Layer 2 — diagonal outline ticker crossing the composition {%- endcomment -%}
+  <div class="lr-hero-diag" aria-hidden="true">
+    <div class="lr-diag-track">
+      <span>{% for i in (1..8) %}{{ section.settings.diag_text }} &nbsp;&middot;&nbsp; {% endfor %}</span>
+    </div>
+  </div>
+
+  {%- comment -%} Layer 3 — swinging clothesline {%- endcomment -%}
+  {%- if section.settings.show_clothesline -%}
+    <div class="lr-clothesline" data-par="0.12" aria-hidden="true">
+      <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMin slice">
+        <path d="M-20 34 Q600 128 1220 34" fill="none" stroke="var(--lr-muted)" stroke-width="2"/>
+        {%- assign xs = "150,352,554,756,958" | split: "," -%}
+        {%- assign ys = "58,73,80,78,66" | split: "," -%}
+        {%- assign cols = "#C41E1E,#E8C547,#F2EDE3,#C41E1E,#4A4844" | split: "," -%}
+        {%- for x in xs -%}
+          {%- assign idx = forloop.index0 -%}
+          {%- assign y = ys[idx] -%}
+          {%- assign c = cols[idx] -%}
+          <g class="lr-hang" data-ox="{{ x }}" data-oy="{{ y }}">
+            <line x1="{{ x }}" y1="{{ y }}" x2="{{ x }}" y2="{{ y | plus: 20 }}" stroke="var(--lr-muted-2)" stroke-width="1.5"/>
+            <g transform="translate({{ x | minus: 34 }}, {{ y | plus: 18 }}) scale(2.9)">
+              <path d="M16 2l-2 3h-4L8 2 3 6v6l3 1v9h12v-9l3-1V6z" fill="{{ c }}" opacity="0.85"/>
+              <path d="M16 2l-2 3h-4L8 2 3 6v6l3 1v9h12v-9l3-1V6z" fill="none" stroke="rgba(17,17,16,.45)" stroke-width="0.4"/>
+            </g>
+          </g>
+        {%- endfor -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} Layer 4 — rotating stamp {%- endcomment -%}
   {%- if section.settings.show_stamp -%}
     <div class="lr-stamp">
       <svg id="lr-stamp-ring" viewBox="0 0 200 200" aria-hidden="true">
@@ -21,13 +55,20 @@
     </div>
   {%- endif -%}
 
-  <div class="lr-hero-inner">
+  {%- comment -%} Layer 5 — content {%- endcomment -%}
+  <div class="lr-hero-inner" data-par="-0.03">
     <span class="lr-eyebrow">{{ section.settings.eyebrow }}</span>
 
     <h1 class="lr-hero-head">
       <span class="lr-line"><span>{{ section.settings.head_line_1 }}</span></span>
       <span class="lr-line"><span class="lr-red-word">{{ section.settings.head_line_2 }}</span></span>
     </h1>
+
+    {%- if section.settings.tagline != blank -%}
+      <p class="lr-hero-tagline">
+        <span>{{ section.settings.tagline }}</span>
+      </p>
+    {%- endif -%}
 
     <div class="lr-hero-foot">
       <div>
@@ -60,6 +101,11 @@
     </div>
   </div>
 
+  {%- comment -%} Layer 6 — live status + scroll cue {%- endcomment -%}
+  {%- if section.settings.live_text != blank -%}
+    <div class="lr-live"><i></i><span>{{ section.settings.live_text }}</span></div>
+  {%- endif -%}
+
   <div class="lr-scroll-cue"><span>Scroll</span><i></i></div>
 </section>
 
@@ -84,6 +130,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Boise, Idaho — Est. 2026" },
     { "type": "text", "id": "head_line_1", "label": "Headline line 1", "default": "Loud" },
     { "type": "text", "id": "head_line_2", "label": "Headline line 2 (red)", "default": "Rag" },
+    { "type": "text", "id": "tagline", "label": "Tagline under headline", "default": "Wear the Laugh" },
     { "type": "textarea", "id": "subhead", "label": "Subheadline", "default": "Original graphic tees printed in small runs. New designs drop the first of every month. When they're gone, they're gone." },
 
     { "type": "header", "content": "Buttons" },
@@ -100,9 +147,14 @@
     { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "12" },
     { "type": "text", "id": "stat2_suffix", "label": "Stat 2 suffix", "default": "" },
     { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Drops a year" },
-    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "48", "info": "Shown with the suffix below" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "48" },
     { "type": "text", "id": "stat3_suffix", "label": "Stat 3 suffix", "default": "h" },
     { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Custom quote turnaround" },
+
+    { "type": "header", "content": "Moving elements" },
+    { "type": "checkbox", "id": "show_clothesline", "label": "Show swinging clothesline", "default": true },
+    { "type": "text", "id": "diag_text", "label": "Diagonal ticker text", "default": "LOUD RAG" },
+    { "type": "text", "id": "live_text", "label": "Live status text", "default": "Now printing this month's run" },
 
     { "type": "header", "content": "Stamp badge" },
     { "type": "checkbox", "id": "show_stamp", "label": "Show rotating stamp", "default": true },

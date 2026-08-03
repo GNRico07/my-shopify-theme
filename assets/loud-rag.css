@@ -544,6 +544,108 @@ p, li, span, a, button, input, select, textarea, label {
 .lr-hero-head .lr-line { display: block; overflow: hidden; }
 .lr-hero-head .lr-red-word { color: var(--lr-red); }
 
+/* Tagline — sits in a bone bar tucked under the headline */
+.lr-hero-tagline {
+  display: inline-block;
+  margin: 18px 0 0;
+  overflow: hidden;
+}
+
+.lr-hero-tagline span {
+  display: inline-block;
+  background: var(--lr-bone);
+  color: var(--lr-ink);
+  font-family: var(--lr-display);
+  font-size: clamp(.78rem, 1.7vw, 1.15rem);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  transform: rotate(-1.2deg);
+}
+
+/* ============================================================
+   HERO — DIAGONAL OUTLINE TICKER
+   ============================================================ */
+
+.lr-hero-diag {
+  position: absolute;
+  top: 34%;
+  left: -12%;
+  width: 124%;
+  transform: rotate(-13deg);
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  border-block: 1px solid rgba(74, 72, 68, .5);
+  padding: 10px 0;
+}
+
+.lr-diag-track {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: var(--lr-display);
+  font-size: clamp(2rem, 6vw, 4.6rem);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(196, 30, 30, .38);
+  will-change: transform;
+}
+
+/* ============================================================
+   HERO — SWINGING CLOTHESLINE
+   ============================================================ */
+
+.lr-clothesline {
+  position: absolute;
+  top: 8%;
+  left: 0;
+  width: 100%;
+  height: min(300px, 34vh);
+  z-index: 2;
+  pointer-events: none;
+  opacity: .9;
+}
+
+.lr-clothesline svg { width: 100%; height: 100%; overflow: visible; }
+.lr-hang { will-change: transform; }
+
+@media (max-width: 900px) { .lr-clothesline { opacity: .38; } }
+
+/* ============================================================
+   HERO — LIVE STATUS
+   ============================================================ */
+
+.lr-live {
+  position: absolute;
+  bottom: 26px;
+  left: var(--lr-gut);
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--lr-body);
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--lr-muted-2);
+}
+
+.lr-live i {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--lr-red);
+  animation: lr-pulse 1.9s ease-in-out infinite;
+  flex: none;
+}
+
+@keyframes lr-pulse {
+  0%, 100% { opacity: 1;  box-shadow: 0 0 0 0 rgba(196,30,30,.55); }
+  50%      { opacity: .45; box-shadow: 0 0 0 7px rgba(196,30,30,0); }
+}
+
+@media (max-width: 760px) { .lr-live { display: none; } }
+
 .lr-hero-foot {
   display: flex;
   flex-wrap: wrap;

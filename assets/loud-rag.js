@@ -275,6 +275,154 @@
   }
 
   /* ============================================================
+     CLOTHESLINE — each shirt swings on its own pendulum,
+     and gets shoved when the cursor passes through it
+     ============================================================ */
+  function initClothesline() {
+    var hangs = document.querySelectorAll('.lr-hang');
+    if (!hangs.length || !window.gsap || reduced) return;
+
+    var pend = [];
+
+    hangs.forEach(function (g, i) {
+      var ox = parseFloat(g.getAttribute('data-ox')) || 0;
+      var oy = parseFloat(g.getAttribute('data-oy')) || 0;
+
+      gsap.set(g, { transformOrigin: ox + 'px ' + oy + 'px' });
+
+      // Idle sway — different amplitude and period per shirt
+      var amp = 3.4 + Math.random() * 4.2;
+      var tw = gsap.to(g, {
+        rotation: amp,
+        duration: 2.1 + Math.random() * 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: i * 0.22
+      });
+      gsap.set(g, { rotation: -amp });
+
+      pend.push({ el: g, tw: tw, kick: 0, vel: 0 });
+    });
+
+    if (!fine) return;
+
+    // Cursor shove — nudges the shirt, then it oscillates back to idle
+    var pending = false;
+    window.addEventListener('mousemove', function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () {
+        pending = false;
+        pend.forEach(function (p) {
+          var r = p.el.getBoundingClientRect();
+          var cx = r.left + r.width / 2;
+          var cy = r.top + r.height / 2;
+          if (Math.hypot(mouse.x - cx, mouse.y - cy) < 130) {
+            var dir = mouse.x < cx ? 1 : -1;
+            if (Math.abs(p.kick) < 1) {
+              p.tw.pause();
+              p.kick = dir * (13 + Math.random() * 9);
+              swing(p);
+            }
+          }
+        });
+      });
+    }, { passive: true });
+
+    function swing(p) {
+      gsap.to(p.el, {
+        rotation: p.kick,
+        duration: 0.34,
+        ease: 'power2.out',
+        onComplete: function () {
+          gsap.to(p.el, {
+            rotation: 0,
+            duration: 2.2,
+            ease: 'elastic.out(1, 0.25)',
+            onComplete: function () { p.kick = 0; p.tw.restart(); }
+          });
+        }
+      });
+    }
+  }
+
+  /* ============================================================
+     DIAGONAL TICKER — scrolls across the hero
+     ============================================================ */
+  function initDiagTicker() {
+    var track = document.querySelector('.lr-diag-track');
+    if (!track || reduced) return;
+
+    var unit = track.querySelector('span');
+    if (!unit) return;
+
+    var w = unit.getBoundingClientRect().width;
+    if (w < 1) return;
+
+    var wrapW = track.parentElement.offsetWidth;
+    var copies = Math.min(Math.ceil((wrapW * 2) / w) + 1, 12);
+    for (var i = 0; i < copies; i++) track.appendChild(unit.cloneNode(true));
+
+    var half = track.scrollWidth / 2;
+    var pos = 0, boost = 0, last = window.scrollY;
+
+    window.addEventListener('scroll', function () {
+      var d = window.scrollY - last;
+      last = window.scrollY;
+      boost = Math.max(-7, Math.min(7, d * 0.26));
+    }, { passive: true });
+
+    (function tick() {
+      boost *= 0.93;
+      pos -= 0.42 + Math.abs(boost);
+      if (pos <= -half) pos += half;
+      track.style.transform = 'translate3d(' + pos + 'px,0,0)';
+      requestAnimationFrame(tick);
+    })();
+  }
+
+  /* ============================================================
+     HERO MOUSE PARALLAX — layers drift against the pointer
+     ============================================================ */
+  function initHeroParallax() {
+    var hero = document.querySelector('.lr-hero');
+    if (!hero || !fine || reduced || !window.gsap) return;
+
+    var layers = [];
+    hero.querySelectorAll('[data-par]').forEach(function (el) {
+      layers.push({
+        el: el,
+        amt: parseFloat(el.getAttribute('data-par')) || 0,
+        qx: gsap.quickTo(el, 'xPercent', { duration: 0.9, ease: 'power2.out' }),
+        qy: gsap.quickTo(el, 'yPercent', { duration: 0.9, ease: 'power2.out' })
+      });
+    });
+
+    if (!layers.length) return;
+
+    var pending = false;
+    hero.addEventListener('mousemove', function (e) {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () {
+        pending = false;
+        var r = hero.getBoundingClientRect();
+        var nx = (e.clientX - r.left) / r.width - 0.5;
+        var ny = (e.clientY - r.top) / r.height - 0.5;
+        layers.forEach(function (l) {
+          l.qx(nx * l.amt * 100);
+          l.qy(ny * l.amt * 60);
+        });
+      });
+    }, { passive: true });
+
+    hero.addEventListener('mouseleave', function () {
+      layers.forEach(function (l) { l.qx(0); l.qy(0); });
+    });
+  }
+
+  /* ============================================================
      PRODUCT CARD HOVER REVEAL
      ============================================================ */
   function initCardPeek() {
@@ -417,11 +565,19 @@
     }
 
     tl.from(hero.querySelectorAll('.lr-eyebrow'), { opacity: 0, y: 14, duration: 0.6 }, '-=0.7')
+      .from(hero.querySelectorAll('.lr-hero-tagline span'), {
+        xPercent: -104, rotate: -8, duration: 0.75, ease: 'power4.out'
+      }, '-=0.58')
+      .from(hero.querySelectorAll('.lr-hang'), {
+        yPercent: -180, opacity: 0, duration: 0.9, stagger: 0.08, ease: 'back.out(1.3)'
+      }, '-=0.75')
+      .from(hero.querySelector('.lr-hero-diag'), { opacity: 0, duration: 0.8 }, '-=0.8')
       .from(hero.querySelectorAll('.lr-hero-sub'), { opacity: 0, y: 22, duration: 0.7 }, '-=0.5')
       .from(hero.querySelectorAll('.lr-hero-cta > *'), { opacity: 0, y: 18, duration: 0.6, stagger: 0.09 }, '-=0.5')
       .from(hero.querySelectorAll('.lr-trust > *'), { opacity: 0, y: 16, duration: 0.5, stagger: 0.07 }, '-=0.45')
       .from(hero.querySelector('.lr-stamp'), { opacity: 0, scale: 0.6, rotate: -50, duration: 0.9, ease: 'back.out(1.6)' }, '-=0.7')
-      .from(hero.querySelector('.lr-scroll-cue'), { opacity: 0, duration: 0.5 }, '-=0.3');
+      .from(hero.querySelector('.lr-scroll-cue'), { opacity: 0, duration: 0.5 }, '-=0.3')
+      .from(hero.querySelector('.lr-live'), { opacity: 0, x: -18, duration: 0.5 }, '-=0.4');
 
     // Slab + halftone drift on scroll
     if (window.ScrollTrigger) {
@@ -689,6 +845,7 @@
     initGrain();
     initCursor();
     initMarquee();
+    initDiagTicker();
     initStamp();
     initCardPeek();
 
@@ -699,6 +856,8 @@
         initLenis();
         heroLoad();
         initFloaters();
+        initClothesline();
+        initHeroParallax();
         initSplit();
         initReveals();
         initMagnetic();
