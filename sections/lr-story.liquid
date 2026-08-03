@@ -1,0 +1,79 @@
+{%- comment -%}
+  LOUD RAG — Our Story / About
+  [REPLACE] Copy and image are editable in the theme editor.
+{%- endcomment -%}
+
+<section class="lr-sec lr-sec--ink2 lr-marks" id="lr-story">
+  <span class="lr-index" style="top: 6%; right: 3%;">01</span>
+
+  <div class="lr-wrap">
+    <div class="lr-story-grid">
+
+      <div>
+        <span class="lr-eyebrow lr-fade-up">{{ section.settings.eyebrow }}</span>
+        <h2 class="lr-display-l lr-split" style="margin: 18px 0 0;">{{ section.settings.heading }}</h2>
+
+        <div class="lr-rule"></div>
+
+        <div class="lr-fade-up">
+          <p class="lr-body">{{ section.settings.body_1 }}</p>
+          <p class="lr-body" style="margin-top: 16px;">{{ section.settings.body_2 }}</p>
+        </div>
+
+        <div class="lr-fade-up" style="margin-top: 34px;">
+          <p class="lr-quote">{{ section.settings.pullquote }}</p>
+          <p class="lr-mono" style="margin-top: 12px;">{{ section.settings.pullquote_by }}</p>
+        </div>
+
+        <div style="margin-top: 38px;">
+          <a href="{{ section.settings.cta_link }}" class="lr-btn-ghost" data-cursor="Shop">
+            <span>{{ section.settings.cta_label }}</span>
+            <span class="lr-arw">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="position: relative;">
+        <div class="lr-tape lr-tape--tl"></div>
+        <div class="lr-tape lr-tape--br"></div>
+        <div class="lr-story-panel">
+          <div class="lr-panel-dots"></div>
+          {%- if section.settings.image != blank -%}
+            <img
+              src="{{ section.settings.image | image_url: width: 1200 }}"
+              alt="{{ section.settings.image.alt | escape }}"
+              loading="lazy"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
+            >
+          {%- else -%}
+            <div style="position:relative;text-align:center;padding:24px;">
+              <div style="font-family:'Archivo Black',sans-serif;font-size:clamp(2.4rem,6vw,4.4rem);line-height:.9;color:var(--lr-red);">LOUD<br>RAG</div>
+              <p class="lr-mono" style="margin-top:14px;">[REPLACE: add a photo in the theme editor]</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LR Story",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We print the thing you were already thinking" },
+    { "type": "textarea", "id": "body_1", "label": "Paragraph 1", "default": "Loud Rag started in a Boise garage with one press, a stack of blanks, and a running joke that got out of hand. We design every graphic ourselves — no clip art, no marketplace templates, no algorithm-generated slop." },
+    { "type": "textarea", "id": "body_2", "label": "Paragraph 2", "default": "Every design runs once. First of the month, new drop, limited quantity. If you miss it, it's gone — and that's on purpose. We'd rather make a hundred people laugh than a hundred thousand people shrug." },
+    { "type": "textarea", "id": "pullquote", "label": "Pull quote", "default": "\"If it doesn't make somebody in the grocery store snort, we didn't print it.\"" },
+    { "type": "text", "id": "pullquote_by", "label": "Pull quote attribution", "default": "— Loud Rag, house rule no. 1" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "See This Month's Drop" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "LR Story", "category": "Loud Rag" }]
+}
+{% endschema %}

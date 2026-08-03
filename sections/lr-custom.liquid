@@ -1,0 +1,90 @@
+{%- comment -%}
+  LOUD RAG — Custom Orders CTA + Location block
+  Contact email: 510ricogn@gmail.com
+{%- endcomment -%}
+
+<section class="lr-cta lr-marks" id="lr-custom">
+  <div class="lr-cta-inner">
+    <span class="lr-eyebrow lr-fade-up" style="color: var(--lr-red);">{{ section.settings.eyebrow }}</span>
+
+    <h2 class="lr-display-l lr-split" style="margin: 20px 0 22px;">{{ section.settings.heading }}</h2>
+
+    <p class="lr-body lr-fade-up" style="max-width: 54ch; margin-inline: auto;">{{ section.settings.body }}</p>
+
+    <div class="lr-fade-up" style="margin-top: 38px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+      <a href="mailto:{{ section.settings.email }}?subject={{ section.settings.email_subject | url_encode }}"
+         class="lr-btn" data-cursor="Email">
+        <span>{{ section.settings.cta_label }}</span>
+        <span class="lr-arw">&rarr;</span>
+      </a>
+      {%- if section.settings.phone != blank -%}
+        <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}" class="lr-btn-ghost" style="border-color: var(--lr-muted); color: var(--lr-ink) !important;">
+          <span>{{ section.settings.phone }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <p class="lr-mono" style="margin-top: 24px; color: var(--lr-muted);">
+      {{ section.settings.note_before }}
+      <a href="mailto:{{ section.settings.email }}" class="lr-mail">{{ section.settings.email }}</a>
+    </p>
+
+    <div class="lr-rule" style="background: rgba(17,17,16,.2); margin-block: 46px;"></div>
+
+    <div class="lr-fade-up" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:28px;text-align:left;">
+      <div>
+        <div class="lr-mono" style="color: var(--lr-red);">Based in</div>
+        <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.location }}</p>
+      </div>
+      <div>
+        <div class="lr-mono" style="color: var(--lr-red);">Ships</div>
+        <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.ships }}</p>
+      </div>
+      <div>
+        <div class="lr-mono" style="color: var(--lr-red);">Reply time</div>
+        <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.reply_time }}</p>
+      </div>
+      <div>
+        <div class="lr-mono" style="color: var(--lr-red);">Drops</div>
+        <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.drops }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lr-marquee" data-speed="0.5">
+  <div class="lr-marquee-track">
+    <span>
+      {%- assign m = section.settings.marquee_text | split: ',' -%}
+      {%- for item in m -%}
+        {{ item | strip }}<i class="lr-dot"></i>
+      {%- endfor -%}
+    </span>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "LR Custom Orders",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Custom Orders" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Got a dumb idea? Send it." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "An inside joke, a logo, a photo of your dog wearing sunglasses — if you can describe it we can print it. Teams, events, businesses, bachelor parties, whatever. Send it over and we'll come back with a mockup and a price." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Email Us Your Idea" },
+    { "type": "text", "id": "email", "label": "Contact email", "default": "510ricogn@gmail.com" },
+    { "type": "text", "id": "email_subject", "label": "Email subject line", "default": "Custom Design Request" },
+    { "type": "text", "id": "phone", "label": "Phone (optional)", "default": "" },
+    { "type": "text", "id": "note_before", "label": "Note before email", "default": "Or reach us directly at" },
+
+    { "type": "header", "content": "Info row" },
+    { "type": "text", "id": "location", "label": "Location", "default": "Boise, Idaho" },
+    { "type": "text", "id": "ships", "label": "Ships", "default": "Nationwide" },
+    { "type": "text", "id": "reply_time", "label": "Reply time", "default": "Within 48 hours" },
+    { "type": "text", "id": "drops", "label": "Drops", "default": "1st of the month" },
+
+    { "type": "header", "content": "Marquee strip" },
+    { "type": "textarea", "id": "marquee_text", "label": "Marquee items (comma separated)", "default": "Custom orders welcome, Group discounts, Fast turnaround, Send us your idea" }
+  ],
+  "presets": [{ "name": "LR Custom Orders", "category": "Loud Rag" }]
+}
+{% endschema %}

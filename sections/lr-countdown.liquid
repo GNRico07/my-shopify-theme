@@ -1,0 +1,101 @@
+{%- comment -%}
+  LOUD RAG — Drop Countdown
+  Leave "Drop date" blank to auto-target the 1st of next month.
+{%- endcomment -%}
+
+<div class="lr-marquee lr-marquee--mustard lr-marquee--tilt-r" data-reverse data-speed="0.45">
+  <div class="lr-marquee-track">
+    <span>
+      {%- assign m = section.settings.marquee_text | split: ',' -%}
+      {%- for item in m -%}
+        {{ item | strip }}<i class="lr-dot"></i>
+      {%- endfor -%}
+    </span>
+  </div>
+</div>
+
+<section class="lr-sec lr-sec--ink lr-marks" id="lr-drop">
+  <span class="lr-index" style="top: 8%; left: 2%;">02</span>
+
+  <div class="lr-wrap">
+    <div style="display:grid;grid-template-columns:1fr auto;gap:clamp(32px,6vw,80px);align-items:end;">
+
+      <div>
+        <span class="lr-eyebrow lr-fade-up">{{ section.settings.eyebrow }}</span>
+        <h2 class="lr-display-l lr-split" style="margin:18px 0 20px;">{{ section.settings.heading }}</h2>
+        <p class="lr-body lr-fade-up" style="max-width:46ch;">{{ section.settings.body }}</p>
+      </div>
+
+      <div class="lr-fade-right" data-countdown="{{ section.settings.drop_date | default: 'auto' }}">
+        <div class="lr-count-grid">
+          <div class="lr-count-cell">
+            <span class="lr-count-num" data-unit="days">00</span>
+            <span class="lr-count-lab">Days</span>
+          </div>
+          <div class="lr-count-cell">
+            <span class="lr-count-num" data-unit="hours">00</span>
+            <span class="lr-count-lab">Hours</span>
+          </div>
+          <div class="lr-count-cell">
+            <span class="lr-count-num" data-unit="minutes">00</span>
+            <span class="lr-count-lab">Mins</span>
+          </div>
+          <div class="lr-count-cell">
+            <span class="lr-count-num" data-unit="seconds">00</span>
+            <span class="lr-count-lab">Secs</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="lr-rule"></div>
+
+    <div class="lr-fade-up" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;">
+      <p class="lr-mono">{{ section.settings.note }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <a href="{{ section.settings.cta_link }}" class="lr-btn" data-cursor="Shop">
+          <span>{{ section.settings.cta_label }}</span>
+          <span class="lr-arw">&rarr;</span>
+        </a>
+        {%- if section.settings.show_signup -%}
+          {%- form 'customer', class: 'lr-signup' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              placeholder="{{ section.settings.signup_placeholder }}"
+              required
+              style="background:transparent;border:1px solid var(--lr-muted);color:var(--lr-bone);padding:18px 20px;font-family:var(--lr-body);font-size:.82rem;letter-spacing:.06em;border-radius:0;min-width:220px;"
+            >
+            <button type="submit" class="lr-btn-ghost" style="border-left:none;">
+              <span>{{ section.settings.signup_label }}</span>
+            </button>
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LR Countdown",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Next Drop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "New designs, first of the month" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Limited runs. Once a design sells out it doesn't come back. Get on the list and you'll know before anyone else." },
+    { "type": "text", "id": "drop_date", "label": "Drop date", "info": "Format: 2026-09-01T10:00:00. Leave blank to auto-target the 1st of next month.", "default": "" },
+    { "type": "text", "id": "note", "label": "Small note", "default": "Free shipping on orders over $60 · Printed and shipped from Boise" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop Current Drop" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "header", "content": "Email signup" },
+    { "type": "checkbox", "id": "show_signup", "label": "Show email signup", "default": true },
+    { "type": "text", "id": "signup_placeholder", "label": "Input placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "signup_label", "label": "Signup button label", "default": "Notify Me" },
+    { "type": "header", "content": "Marquee strip" },
+    { "type": "textarea", "id": "marquee_text", "label": "Marquee items (comma separated)", "default": "Limited runs, Gone means gone, New drop monthly, Don't sleep on it" }
+  ],
+  "presets": [{ "name": "LR Countdown", "category": "Loud Rag" }]
+}
+{% endschema %}

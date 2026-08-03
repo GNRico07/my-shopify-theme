@@ -1,0 +1,116 @@
+{%- comment -%}
+  LOUD RAG — Reviews
+  [REPLACE] Swap the placeholder quotes for real customer reviews.
+  Add or remove reviews using blocks in the theme editor.
+{%- endcomment -%}
+
+<section class="lr-sec lr-sec--ink2 lr-marks" id="lr-reviews">
+  <span class="lr-index" style="top: 5%; right: 4%;">03</span>
+
+  <div class="lr-wrap">
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:52px;">
+      <div>
+        <span class="lr-eyebrow lr-fade-up">{{ section.settings.eyebrow }}</span>
+        <h2 class="lr-display-l lr-split" style="margin:18px 0 0;max-width:16ch;">{{ section.settings.heading }}</h2>
+      </div>
+
+      <div style="text-align:right;">
+        <span class="lr-trust-num" data-count="{{ section.settings.rating }}" data-dec="1">0</span>
+        <span class="lr-trust-lab">
+          Average rating ·
+          <span data-count="{{ section.settings.review_count }}">0</span> reviews
+        </span>
+      </div>
+    </div>
+
+    <div class="lr-revs" data-stagger>
+      {%- for block in section.blocks -%}
+        <article class="lr-rev" {{ block.shopify_attributes }}>
+          <span class="lr-rev-mark">&ldquo;</span>
+          <p class="lr-body lr-rev-body">{{ block.settings.quote }}</p>
+          <div class="lr-stars">{{ block.settings.stars }}</div>
+          <div class="lr-rev-by">
+            <span class="lr-rev-ini">{{ block.settings.name | slice: 0, 2 | upcase }}</span>
+            <div>
+              <div style="font-family:var(--lr-display);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;">{{ block.settings.name }}</div>
+              <div class="lr-mono" style="font-size:.62rem;">{{ block.settings.meta }}</div>
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    <div class="lr-rule"></div>
+
+    <div class="lr-fade-up" style="text-align:center;">
+      <p class="lr-mono" style="margin-bottom:22px;">{{ section.settings.note }}</p>
+      <a href="{{ section.settings.cta_link }}" class="lr-btn" data-cursor="Shop">
+        <span>{{ section.settings.cta_label }}</span>
+        <span class="lr-arw">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LR Reviews",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Verdict" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "People keep getting stopped in public" },
+    { "type": "text", "id": "rating", "label": "Average rating", "default": "4.9" },
+    { "type": "text", "id": "review_count", "label": "Review count", "default": "212" },
+    { "type": "text", "id": "note", "label": "Note above button", "default": "[REPLACE: swap these for real reviews once you have them]" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop All Designs" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "[REPLACE: customer quote]" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Customer Name" },
+        { "type": "text", "id": "meta", "label": "Meta line", "default": "Verified buyer · Boise, ID" },
+        { "type": "text", "id": "stars", "label": "Stars", "default": "★★★★★" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LR Reviews",
+      "category": "Loud Rag",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Wore it to a work meeting and my manager had to leave the room. Worth every penny. Fabric is way heavier than I expected too.",
+            "name": "Dana R.",
+            "meta": "Verified buyer · Boise, ID",
+            "stars": "★★★★★"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Third drop I've bought from. The prints haven't cracked once and I am rough on shirts. Genuinely surprised by the quality.",
+            "name": "Marcus T.",
+            "meta": "Verified buyer · Portland, OR",
+            "stars": "★★★★★"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Sent them a dumb inside joke from our group chat and they turned it into an actual shirt in under a week. Everyone lost it.",
+            "name": "Priya S.",
+            "meta": "Custom order · Denver, CO",
+            "stars": "★★★★★"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

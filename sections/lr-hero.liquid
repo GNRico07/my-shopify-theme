@@ -1,0 +1,118 @@
+{%- comment -%}
+  LOUD RAG — Hero
+  [REPLACE] All copy is editable in the theme editor under this section's settings.
+{%- endcomment -%}
+
+<section class="lr-hero" id="lr-hero">
+  <div class="lr-hero-halftone"></div>
+  <div class="lr-hero-slab"></div>
+
+  {%- if section.settings.show_stamp -%}
+    <div class="lr-stamp">
+      <svg id="lr-stamp-ring" viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <path id="lr-stamp-path" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
+        </defs>
+        <text font-family="Archivo Black, sans-serif" font-size="15" fill="#E8C547" letter-spacing="4.5">
+          <textPath href="#lr-stamp-path">{{ section.settings.stamp_text }}</textPath>
+        </text>
+      </svg>
+      <div class="lr-stamp-core">{{ section.settings.stamp_core }}</div>
+    </div>
+  {%- endif -%}
+
+  <div class="lr-hero-inner">
+    <span class="lr-eyebrow">{{ section.settings.eyebrow }}</span>
+
+    <h1 class="lr-hero-head">
+      <span class="lr-line"><span>{{ section.settings.head_line_1 }}</span></span>
+      <span class="lr-line"><span class="lr-red-word">{{ section.settings.head_line_2 }}</span></span>
+    </h1>
+
+    <div class="lr-hero-foot">
+      <div>
+        <p class="lr-body lr-hero-sub">{{ section.settings.subhead }}</p>
+        <div class="lr-hero-cta" style="margin-top:26px;">
+          <a href="{{ section.settings.cta_link }}" class="lr-btn" data-cursor="{{ section.settings.cta_cursor }}">
+            <span>{{ section.settings.cta_label }}</span>
+            <span class="lr-arw">&rarr;</span>
+          </a>
+          <a href="{{ section.settings.cta2_link }}" class="lr-btn-ghost">
+            <span>{{ section.settings.cta2_label }}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="lr-trust">
+        <div>
+          <span class="lr-trust-num" data-count="{{ section.settings.stat1_num }}" data-suffix="{{ section.settings.stat1_suffix }}">0</span>
+          <span class="lr-trust-lab">{{ section.settings.stat1_label }}</span>
+        </div>
+        <div>
+          <span class="lr-trust-num" data-count="{{ section.settings.stat2_num }}" data-suffix="{{ section.settings.stat2_suffix }}">0</span>
+          <span class="lr-trust-lab">{{ section.settings.stat2_label }}</span>
+        </div>
+        <div>
+          <span class="lr-trust-num" data-count="{{ section.settings.stat3_num }}" data-suffix="{{ section.settings.stat3_suffix }}">0</span>
+          <span class="lr-trust-lab">{{ section.settings.stat3_label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lr-scroll-cue"><span>Scroll</span><i></i></div>
+</section>
+
+{%- if section.settings.show_marquee -%}
+  <div class="lr-marquee lr-marquee--tilt" data-speed="0.6">
+    <div class="lr-marquee-track">
+      <span>
+        {%- assign items = section.settings.marquee_text | split: ',' -%}
+        {%- for item in items -%}
+          {{ item | strip }}<i class="lr-dot"></i>
+        {%- endfor -%}
+      </span>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "LR Hero",
+  "settings": [
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Boise, Idaho — Est. 2026" },
+    { "type": "text", "id": "head_line_1", "label": "Headline line 1", "default": "Loud" },
+    { "type": "text", "id": "head_line_2", "label": "Headline line 2 (red)", "default": "Rag" },
+    { "type": "textarea", "id": "subhead", "label": "Subheadline", "default": "Original graphic tees printed in small runs. New designs drop the first of every month. When they're gone, they're gone." },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "cta_label", "label": "Primary button label", "default": "Shop the Drop" },
+    { "type": "url", "id": "cta_link", "label": "Primary button link" },
+    { "type": "text", "id": "cta_cursor", "label": "Cursor label on hover", "default": "Shop" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button label", "default": "Our Story" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary button link" },
+
+    { "type": "header", "content": "Trust stats" },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 number", "default": "100" },
+    { "type": "text", "id": "stat1_suffix", "label": "Stat 1 suffix", "default": "%" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Original designs" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "12" },
+    { "type": "text", "id": "stat2_suffix", "label": "Stat 2 suffix", "default": "" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Drops a year" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "48", "info": "Shown with the suffix below" },
+    { "type": "text", "id": "stat3_suffix", "label": "Stat 3 suffix", "default": "h" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Custom quote turnaround" },
+
+    { "type": "header", "content": "Stamp badge" },
+    { "type": "checkbox", "id": "show_stamp", "label": "Show rotating stamp", "default": true },
+    { "type": "text", "id": "stamp_text", "label": "Stamp ring text", "default": "LOUD RAG · BOISE IDAHO · SMALL RUNS · " },
+    { "type": "text", "id": "stamp_core", "label": "Stamp centre", "default": "LR" },
+
+    { "type": "header", "content": "Marquee strip" },
+    { "type": "checkbox", "id": "show_marquee", "label": "Show marquee below hero", "default": true },
+    { "type": "textarea", "id": "marquee_text", "label": "Marquee items (comma separated)", "default": "New drop monthly, Printed in small runs, Custom orders welcome, Boise Idaho, Wear it loud" }
+  ],
+  "presets": [{ "name": "LR Hero", "category": "Loud Rag" }]
+}
+{% endschema %}
