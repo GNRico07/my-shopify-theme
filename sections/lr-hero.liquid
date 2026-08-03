@@ -126,45 +126,172 @@
 {
   "name": "LR Hero",
   "settings": [
-    { "type": "header", "content": "Headline" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Boise, Idaho — Est. 2026" },
-    { "type": "text", "id": "head_line_1", "label": "Headline line 1", "default": "Loud" },
-    { "type": "text", "id": "head_line_2", "label": "Headline line 2 (red)", "default": "Rag" },
-    { "type": "text", "id": "tagline", "label": "Tagline under headline", "default": "Wear the Laugh" },
-    { "type": "textarea", "id": "subhead", "label": "Subheadline", "default": "Original graphic tees printed in small runs. New designs drop the first of every month. When they're gone, they're gone." },
-
-    { "type": "header", "content": "Buttons" },
-    { "type": "text", "id": "cta_label", "label": "Primary button label", "default": "Shop the Drop" },
-    { "type": "url", "id": "cta_link", "label": "Primary button link" },
-    { "type": "text", "id": "cta_cursor", "label": "Cursor label on hover", "default": "Shop" },
-    { "type": "text", "id": "cta2_label", "label": "Secondary button label", "default": "Our Story" },
-    { "type": "url", "id": "cta2_link", "label": "Secondary button link" },
-
-    { "type": "header", "content": "Trust stats" },
-    { "type": "text", "id": "stat1_num", "label": "Stat 1 number", "default": "100" },
-    { "type": "text", "id": "stat1_suffix", "label": "Stat 1 suffix", "default": "%" },
-    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Original designs" },
-    { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "12" },
-    { "type": "text", "id": "stat2_suffix", "label": "Stat 2 suffix", "default": "" },
-    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Drops a year" },
-    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "48" },
-    { "type": "text", "id": "stat3_suffix", "label": "Stat 3 suffix", "default": "h" },
-    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Custom quote turnaround" },
-
-    { "type": "header", "content": "Moving elements" },
-    { "type": "checkbox", "id": "show_clothesline", "label": "Show swinging clothesline", "default": true },
-    { "type": "text", "id": "diag_text", "label": "Diagonal ticker text", "default": "LOUD RAG" },
-    { "type": "text", "id": "live_text", "label": "Live status text", "default": "Now printing this month's run" },
-
-    { "type": "header", "content": "Stamp badge" },
-    { "type": "checkbox", "id": "show_stamp", "label": "Show rotating stamp", "default": true },
-    { "type": "text", "id": "stamp_text", "label": "Stamp ring text", "default": "LOUD RAG · BOISE IDAHO · SMALL RUNS · " },
-    { "type": "text", "id": "stamp_core", "label": "Stamp centre", "default": "LR" },
-
-    { "type": "header", "content": "Marquee strip" },
-    { "type": "checkbox", "id": "show_marquee", "label": "Show marquee below hero", "default": true },
-    { "type": "textarea", "id": "marquee_text", "label": "Marquee items (comma separated)", "default": "New drop monthly, Printed in small runs, Custom orders welcome, Boise Idaho, Wear it loud" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Boise, Idaho — Est. 2026"
+    },
+    {
+      "type": "text",
+      "id": "head_line_1",
+      "label": "Headline line 1",
+      "default": "Loud"
+    },
+    {
+      "type": "text",
+      "id": "head_line_2",
+      "label": "Headline line 2 (red)",
+      "default": "Rag"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline under headline",
+      "default": "Wear the Laugh"
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subheadline",
+      "default": "Original graphic tees printed in small runs. New designs drop the first of every month. When they're gone, they're gone."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary button label",
+      "default": "Shop the Drop"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta_cursor",
+      "label": "Cursor label on hover",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Secondary button label",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "cta2_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "stat1_num",
+      "label": "Stat 1 number",
+      "default": "100"
+    },
+    {
+      "type": "text",
+      "id": "stat1_suffix",
+      "label": "Stat 1 suffix",
+      "default": "%"
+    },
+    {
+      "type": "text",
+      "id": "stat1_label",
+      "label": "Stat 1 label",
+      "default": "Original designs"
+    },
+    {
+      "type": "text",
+      "id": "stat2_num",
+      "label": "Stat 2 number",
+      "default": "12"
+    },
+    {
+      "type": "text",
+      "id": "stat2_suffix",
+      "label": "Stat 2 suffix",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "stat2_label",
+      "label": "Stat 2 label",
+      "default": "Drops a year"
+    },
+    {
+      "type": "text",
+      "id": "stat3_num",
+      "label": "Stat 3 number",
+      "default": "48"
+    },
+    {
+      "type": "text",
+      "id": "stat3_suffix",
+      "label": "Stat 3 suffix",
+      "default": "h"
+    },
+    {
+      "type": "text",
+      "id": "stat3_label",
+      "label": "Stat 3 label",
+      "default": "Custom quote turnaround"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_clothesline",
+      "label": "Show swinging clothesline",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "diag_text",
+      "label": "Diagonal ticker text",
+      "default": "LOUD RAG"
+    },
+    {
+      "type": "text",
+      "id": "live_text",
+      "label": "Live status text",
+      "default": "Now printing this month's run"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stamp",
+      "label": "Show rotating stamp",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stamp_text",
+      "label": "Stamp ring text",
+      "default": "LOUD RAG · BOISE IDAHO · SMALL RUNS · "
+    },
+    {
+      "type": "text",
+      "id": "stamp_core",
+      "label": "Stamp centre",
+      "default": "LR"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_marquee",
+      "label": "Show marquee below hero",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "marquee_text",
+      "label": "Marquee items (comma separated)",
+      "default": "New drop monthly, Printed in small runs, Custom orders welcome, Boise Idaho, Wear it loud"
+    }
   ],
-  "presets": [{ "name": "LR Hero", "category": "Loud Rag" }]
+  "presets": [
+    {
+      "name": "LR Hero",
+      "category": "Loud Rag"
+    }
+  ]
 }
 {% endschema %}
