@@ -9,6 +9,39 @@
  */
 {
   "sections": {
+    "lr_hero_jyfJF4": {
+      "type": "lr-hero",
+      "name": "LR Hero",
+      "settings": {
+        "eyebrow": "Boise, Idaho — Est. 2026",
+        "head_line_1": "Loud",
+        "head_line_2": "Rag",
+        "tagline": "Wear the Laugh",
+        "subhead": "Original graphic tees printed in small runs. New designs drop the first of every month. When they're gone, they're gone.",
+        "cta_label": "Shop the Drop",
+        "cta_link": "",
+        "cta_cursor": "Shop",
+        "cta2_label": "Our Story",
+        "cta2_link": "",
+        "stat1_num": "100",
+        "stat1_suffix": "%",
+        "stat1_label": "Original designs",
+        "stat2_num": "12",
+        "stat2_suffix": "",
+        "stat2_label": "Drops a year",
+        "stat3_num": "48",
+        "stat3_suffix": "h",
+        "stat3_label": "Custom quote turnaround",
+        "show_clothesline": true,
+        "diag_text": "LOUD RAG",
+        "live_text": "Now printing this month's run",
+        "show_stamp": true,
+        "stamp_text": "LOUD RAG · BOISE IDAHO · SMALL RUNS ·",
+        "stamp_core": "LR",
+        "show_marquee": true,
+        "marquee_text": "New drop monthly, Printed in small runs, Custom orders welcome, Boise Idaho, Wear it loud"
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -199,7 +232,7 @@
           ]
         }
       },
-      "name": "This Month’s Drop",
+      "name": "Funny Shirtzz Collection",
       "settings": {
         "collection": "all",
         "layout_type": "grid",
@@ -220,67 +253,71 @@
         "padding-block-end": 48
       }
     },
-    "lr_hero": {
-      "type": "lr-hero",
+    "1780076281eb2963d9": {
+      "type": "_blocks",
+      "blocks": {
+        "text_fn9MgH": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Feel Free to Send us Personalized Designs discounts apply once design is esablished</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_fn9MgH"
+      ],
       "settings": {
-        "eyebrow": "Boise, Idaho — Est. 2026",
-        "head_line_1": "Loud",
-        "head_line_2": "Rag",
-        "subhead": "Original graphic tees printed in small runs. New designs drop the first of every month. When they're gone, they're gone.",
-        "cta_label": "Shop the Drop",
-        "cta_link": "shopify://collections/all",
-        "cta_cursor": "Shop",
-        "cta2_label": "Our Story",
-        "cta2_link": "#lr-story",
-        "stat1_num": "100",
-        "stat1_suffix": "%",
-        "stat1_label": "Original designs",
-        "stat2_num": "12",
-        "stat2_suffix": "",
-        "stat2_label": "Drops a year",
-        "stat3_num": "48",
-        "stat3_suffix": "h",
-        "stat3_label": "Custom quote turnaround",
-        "show_stamp": true,
-        "stamp_text": "LOUD RAG · BOISE IDAHO · SMALL RUNS · ",
-        "stamp_core": "LR",
-        "show_marquee": true,
-        "marquee_text": "New drop monthly, Printed in small runs, Custom orders welcome, Boise Idaho, Wear it loud"
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
-    "lr_countdown": {
-      "type": "lr-countdown",
-      "settings": {
-        "eyebrow": "Next Drop",
-        "heading": "New designs, first of the month",
-        "body": "Limited runs. Once a design sells out it doesn't come back. Get on the list and you'll know before anyone else.",
-        "drop_date": "",
-        "note": "Free shipping on orders over $60 · Printed and shipped from Boise",
-        "cta_label": "Shop Current Drop",
-        "cta_link": "shopify://collections/all",
-        "show_signup": true,
-        "signup_placeholder": "your@email.com",
-        "signup_label": "Notify Me",
-        "marquee_text": "Limited runs, Gone means gone, New drop monthly, Don't sleep on it"
-      }
-    },
-    "lr_story": {
-      "type": "lr-story",
-      "settings": {
-        "eyebrow": "Our Story",
-        "heading": "We print the thing you were already thinking",
-        "body_1": "Loud Rag started in a Boise garage with one press, a stack of blanks, and a running joke that got out of hand. We design every graphic ourselves — no clip art, no marketplace templates, no algorithm-generated slop.",
-        "body_2": "Every design runs once. First of the month, new drop, limited quantity. If you miss it, it's gone — and that's on purpose. We'd rather make a hundred people laugh than a hundred thousand people shrug.",
-        "pullquote": "\"If it doesn't make somebody in the grocery store snort, we didn't print it.\"",
-        "pullquote_by": "— Loud Rag, house rule no. 1",
-        "cta_label": "See This Month's Drop",
-        "cta_link": "shopify://collections/all"
-      }
-    },
-    "lr_reviews": {
+    "lr_testimonials_eGRARQ": {
       "type": "lr-testimonials",
       "blocks": {
-        "r1": {
+        "review_6yUVC8": {
           "type": "review",
           "settings": {
             "quote": "Wore it to a work meeting and my manager had to leave the room. Worth every penny. Fabric is way heavier than I expected too.",
@@ -289,7 +326,7 @@
             "star_count": 5
           }
         },
-        "r2": {
+        "review_JrDCKg": {
           "type": "review",
           "settings": {
             "quote": "Third drop I've bought from. The prints haven't cracked once and I am rough on shirts. Genuinely surprised by the quality.",
@@ -298,7 +335,7 @@
             "star_count": 5
           }
         },
-        "r3": {
+        "review_prMTtL": {
           "type": "review",
           "settings": {
             "quote": "Sent them a dumb inside joke from our group chat and they turned it into an actual shirt in under a week. Everyone lost it.",
@@ -309,10 +346,11 @@
         }
       },
       "block_order": [
-        "r1",
-        "r2",
-        "r3"
+        "review_6yUVC8",
+        "review_JrDCKg",
+        "review_prMTtL"
       ],
+      "name": "LR Reviews",
       "settings": {
         "eyebrow": "The Verdict",
         "heading": "People keep getting stopped in public",
@@ -320,34 +358,14 @@
         "review_count": "212",
         "note": "[REPLACE: swap these for real reviews once you have them]",
         "cta_label": "Shop All Designs",
-        "cta_link": "shopify://collections/all"
-      }
-    },
-    "lr_custom": {
-      "type": "lr-custom",
-      "settings": {
-        "eyebrow": "Custom Orders",
-        "heading": "Got a dumb idea? Send it.",
-        "body": "An inside joke, a logo, a photo of your dog wearing sunglasses — if you can describe it we can print it. Teams, events, businesses, bachelor parties, whatever. Send it over and we'll come back with a mockup and a price.",
-        "cta_label": "Email Us Your Idea",
-        "email": "510ricogn@gmail.com",
-        "email_subject": "Custom Design Request",
-        "phone": "",
-        "note_before": "Or reach us directly at",
-        "location": "Boise, Idaho",
-        "ships": "Nationwide",
-        "reply_time": "Within 48 hours",
-        "drops": "1st of the month",
-        "marquee_text": "Custom orders welcome, Group discounts, Fast turnaround, Send us your idea"
+        "cta_link": ""
       }
     }
   },
   "order": [
-    "lr_hero",
+    "lr_hero_jyfJF4",
     "product_list_fa6P9H",
-    "lr_countdown",
-    "lr_story",
-    "lr_reviews",
-    "lr_custom"
+    "1780076281eb2963d9",
+    "lr_testimonials_eGRARQ"
   ]
 }

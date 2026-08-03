@@ -11,6 +11,56 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "lr_story_LinFxD": {
+      "type": "lr-story",
+      "name": "LR Story",
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "We print the thing you were already thinking",
+        "body_1": "Loud Rag started in a Boise garage with one press, a stack of blanks, and a running joke that got out of hand. We design every graphic ourselves — no clip art, no marketplace templates, no algorithm-generated slop.",
+        "body_2": "Every design runs once. First of the month, new drop, limited quantity. If you miss it, it's gone — and that's on purpose. We'd rather make a hundred people laugh than a hundred thousand people shrug.",
+        "pullquote": "\"If it doesn't make somebody in the grocery store snort, we didn't print it.\"",
+        "pullquote_by": "— Loud Rag, house rule no. 1",
+        "cta_label": "See This Month's Drop",
+        "cta_link": ""
+      }
+    },
+    "lr_countdown_74W3RK": {
+      "type": "lr-countdown",
+      "name": "LR Countdown",
+      "settings": {
+        "eyebrow": "Next Drop",
+        "heading": "New designs, first of the month",
+        "body": "Limited runs. Once a design sells out it doesn't come back. Get on the list and you'll know before anyone else.",
+        "drop_date": "",
+        "note": "Free shipping on orders over $60 · Printed and shipped from Boise",
+        "cta_label": "Shop Current Drop",
+        "cta_link": "",
+        "show_signup": true,
+        "signup_placeholder": "your@email.com",
+        "signup_label": "Notify Me",
+        "marquee_text": "Limited runs, Gone means gone, New drop monthly, Don't sleep on it"
+      }
+    },
+    "lr_custom_jWm8i3": {
+      "type": "lr-custom",
+      "name": "LR Custom Orders",
+      "settings": {
+        "eyebrow": "Custom Orders",
+        "heading": "Got a dumb idea? Send it.",
+        "body": "An inside joke, a logo, a photo of your dog wearing sunglasses — if you can describe it we can print it. Teams, events, businesses, bachelor parties, whatever. Send it over and we'll come back with a mockup and a price.",
+        "cta_label": "Email Us Your Idea",
+        "email": "510ricogn@gmail.com",
+        "email_subject": "Custom Design Request",
+        "phone": "",
+        "note_before": "Or reach us directly at",
+        "location": "Boise, Idaho",
+        "ships": "Nationwide",
+        "reply_time": "Within 48 hours",
+        "drops": "1st of the month",
+        "marquee_text": "Custom orders welcome, Group discounts, Fast turnaround, Send us your idea"
+      }
+    },
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
@@ -18,6 +68,12 @@
           "type": "group",
           "settings": {
             "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
             "gap": 10,
             "width": "fill",
             "custom_width": 100,
@@ -28,14 +84,12 @@
             "inherit_color_scheme": true,
             "color_scheme": "",
             "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
@@ -43,12 +97,10 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center"
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "brand_title": {
@@ -79,7 +131,7 @@
             "brand_desc": {
               "type": "text",
               "settings": {
-                "text": "<p>Custom funny tees, printed and shipped from sunny Boise, Idaho. Wear the joke \u2014 life's too short for boring clothes.</p>",
+                "text": "<p>Custom funny tees, printed and shipped from sunny Boise, Idaho. Wear the joke — life's too short for boring clothes.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -104,7 +156,7 @@
             "contact_info": {
               "type": "text",
               "settings": {
-                "text": "<p>\ud83d\udccd Boise, Idaho<br>\ud83d\udcde (541) 325-6367<br>\u2709\ufe0f <a href='mailto:griconac@gmail.com'>griconac@gmail.com</a></p>",
+                "text": "<p>📍 Boise, Idaho<br>📞 (541) 325-6367<br>✉️ <a href='mailto:griconac@gmail.com'>griconac@gmail.com</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -137,6 +189,12 @@
           "type": "group",
           "settings": {
             "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
             "gap": 6,
             "width": "fill",
             "custom_width": 100,
@@ -147,14 +205,12 @@
             "inherit_color_scheme": true,
             "color_scheme": "",
             "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
@@ -162,12 +218,10 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center"
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "shop_h": {
@@ -230,6 +284,12 @@
           "type": "group",
           "settings": {
             "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
             "gap": 6,
             "width": "fill",
             "custom_width": 100,
@@ -240,14 +300,12 @@
             "inherit_color_scheme": true,
             "color_scheme": "",
             "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
@@ -255,12 +313,10 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center"
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "help_h": {
@@ -323,6 +379,12 @@
           "type": "group",
           "settings": {
             "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
             "gap": 10,
             "width": "fill",
             "custom_width": 100,
@@ -333,14 +395,12 @@
             "inherit_color_scheme": true,
             "color_scheme": "",
             "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
@@ -348,12 +408,10 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center"
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "nl_h": {
@@ -412,9 +470,9 @@
                 "width": "fill",
                 "custom_width": 100,
                 "inherit_color_scheme": true,
+                "color_scheme": "",
                 "heading": "",
                 "heading_preset": "h3",
-                "color_scheme": "",
                 "border_style": "all",
                 "border_width": 1,
                 "border_radius": 100,
@@ -511,6 +569,9 @@
     }
   },
   "order": [
+    "lr_story_LinFxD",
+    "lr_countdown_74W3RK",
+    "lr_custom_jWm8i3",
     "footer_m9NzUG",
     "footer_utilities_jLGE8U"
   ]
