@@ -98,32 +98,44 @@ p, li, span, a, button, input, select, textarea, label {
   body, a, button, [role="button"] { cursor: none !important; }
 }
 
-#lr-cursor {
+/* --- Iron cursor --- */
+#lr-iron {
   position: fixed;
   top: 0; left: 0;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--lr-bone);
+  width: 44px; height: 33px;
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-  transition: width .22s cubic-bezier(.2,.9,.2,1),
-              height .22s cubic-bezier(.2,.9,.2,1),
-              background .18s linear,
-              border-radius .22s ease;
+  will-change: transform;
 }
 
-#lr-cursor.is-hover {
-  width: 56px; height: 56px;
-  background: var(--lr-red);
-  mix-blend-mode: normal;
+#lr-iron svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+#lr-iron .lr-iron-body  { fill: var(--lr-bone); transition: fill .2s linear; }
+#lr-iron .lr-iron-plate { fill: var(--lr-red); }
+#lr-iron .lr-iron-grip  { stroke: var(--lr-bone); transition: stroke .2s linear; }
+
+#lr-iron.is-hover .lr-iron-body  { fill: var(--lr-mustard); }
+#lr-iron.is-hover .lr-iron-grip  { stroke: var(--lr-mustard); }
+
+/* Press-down squash on click */
+#lr-iron .lr-iron-wrap {
+  transform-origin: 50% 88%;
+  transition: transform .13s cubic-bezier(.3,1.4,.5,1);
+}
+#lr-iron.is-press .lr-iron-wrap { transform: translateY(3px) scaleY(.9); }
+
+/* --- Steam puffs --- */
+.lr-steam {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  border-radius: 50%;
+  background: var(--lr-bone);
+  opacity: .5;
+  will-change: transform, opacity;
 }
 
-#lr-cursor.is-text {
-  width: 3px; height: 32px;
-  border-radius: 1px;
-}
+@media (hover: none) { #lr-iron { display: none; } }
 
 #lr-cursor-label {
   position: fixed;
@@ -142,8 +154,55 @@ p, li, span, a, button, input, select, textarea, label {
 #lr-cursor-label.is-on { transform: translate(-50%, -50%) scale(1); }
 
 @media (hover: none) {
-  #lr-cursor, #lr-cursor-label { display: none; }
+  #lr-cursor-label { display: none; }
 }
+
+/* ============================================================
+   FLOATING ELEMENTS
+   ============================================================ */
+
+.lr-floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.lr-floater {
+  position: absolute;
+  will-change: transform;
+  opacity: 0;
+}
+
+.lr-floater svg { display: block; }
+
+/* ============================================================
+   PRODUCT CARD HOVER REVEAL
+   ============================================================ */
+
+.lr-card-peek {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: var(--lr-red);
+  color: var(--lr-bone);
+  font-family: var(--lr-display);
+  font-size: .7rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(101%);
+  transition: transform .42s cubic-bezier(.65,0,.35,1);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.card-wrapper, .product-card-wrapper { position: relative; }
+.card-wrapper:hover .lr-card-peek,
+.product-card-wrapper:hover .lr-card-peek { transform: translateY(0); }
 
 /* ============================================================
    TEXTURE UTILITIES — halftone, registration marks, tape

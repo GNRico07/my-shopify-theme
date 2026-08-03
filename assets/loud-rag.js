@@ -40,59 +40,250 @@
   }
 
   /* ============================================================
-     CUSTOM CURSOR — morphs on hover, shows contextual label
+     IRON CURSOR — follows the pointer, tilts with travel,
+     puffs steam on click
      ============================================================ */
+  var mouse = { x: -300, y: -300 };
+
+  var IRON_SVG =
+    '<svg viewBox="0 0 44 33" aria-hidden="true">' +
+      '<g class="lr-iron-wrap">' +
+        '<path class="lr-iron-grip" d="M12 13 Q12 4 22 4 Q32 4 32 13" fill="none" stroke-width="3" stroke-linecap="round"/>' +
+        '<path class="lr-iron-body" d="M7 24 L7 17 Q7 11 15 11 L26 11 Q36 11 38 24 Z"/>' +
+        '<path class="lr-iron-plate" d="M4 25 H40 L36 31 H8 Z"/>' +
+      '</g>' +
+    '</svg>';
+
   function initCursor() {
     if (!fine) return;
 
-    var dot = document.createElement('div');
-    dot.id = 'lr-cursor';
+    var iron = document.createElement('div');
+    iron.id = 'lr-iron';
+    iron.innerHTML = IRON_SVG;
+
     var lab = document.createElement('div');
     lab.id = 'lr-cursor-label';
-    document.body.appendChild(dot);
+
+    document.body.appendChild(iron);
     document.body.appendChild(lab);
 
-    var mx = -200, my = -200, cx = -200, cy = -200;
-    var lx = -200, ly = -200;
+    var ix = -300, iy = -300, lx = -300, ly = -300, tilt = 0;
 
     document.addEventListener('mousemove', function (e) {
-      mx = e.clientX;
-      my = e.clientY;
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
     }, { passive: true });
 
     (function loop() {
-      cx += (mx - cx) * 0.22;
-      cy += (my - cy) * 0.22;
-      lx += (mx - lx) * 0.13;
-      ly += (my - ly) * 0.13;
-      dot.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
-      lab.style.transform = 'translate(' + lx + 'px,' + ly + 'px) translate(-50%,-50%) scale(' +
+      var px = ix;
+      ix += (mouse.x - ix) * 0.2;
+      iy += (mouse.y - iy) * 0.2;
+      lx += (mouse.x - lx) * 0.13;
+      ly += (mouse.y - ly) * 0.13;
+
+      // Tilt into the direction of travel, capped and eased back
+      var target = Math.max(-14, Math.min(14, (ix - px) * 1.4));
+      tilt += (target - tilt) * 0.12;
+
+      // Anchor near the soleplate tip so the iron sits under the pointer
+      iron.style.transform =
+        'translate(' + ix + 'px,' + iy + 'px) translate(-34%, -78%) rotate(' + tilt.toFixed(2) + 'deg)';
+      lab.style.transform =
+        'translate(' + lx + 'px,' + ly + 'px) translate(-50%,-50%) scale(' +
         (lab.classList.contains('is-on') ? 1 : 0) + ')';
+
       requestAnimationFrame(loop);
     })();
 
-    var HOVER = 'a, button, [role="button"], .lr-btn, .lr-btn-ghost, .card-wrapper, .product-card-wrapper, summary';
-    var TEXT  = 'p, h1, h2, h3, h4, .lr-body, .lr-quote';
+    var HOVER = 'a, button, [role="button"], .lr-btn, .lr-btn-ghost, .card-wrapper, .product-card-wrapper, summary, input, .lr-rev';
 
     document.addEventListener('mouseover', function (e) {
       var h = e.target.closest(HOVER);
       if (h) {
-        dot.classList.add('is-hover');
-        dot.classList.remove('is-text');
+        iron.classList.add('is-hover');
         var l = h.getAttribute('data-cursor');
         if (l) { lab.textContent = l; lab.classList.add('is-on'); }
         return;
       }
-      dot.classList.remove('is-hover');
+      iron.classList.remove('is-hover');
       lab.classList.remove('is-on');
-      dot.classList.toggle('is-text', !!e.target.closest(TEXT));
     }, { passive: true });
 
-    document.addEventListener('mouseleave', function () {
-      dot.style.opacity = '0';
+    document.addEventListener('mouseleave', function () { iron.style.opacity = '0'; });
+    document.addEventListener('mouseenter', function () { iron.style.opacity = '1'; });
+
+    /* --- Steam on click --- */
+    document.addEventListener('mousedown', function () {
+      iron.classList.add('is-press');
+      steam(mouse.x, mouse.y);
     });
-    document.addEventListener('mouseenter', function () {
-      dot.style.opacity = '1';
+    document.addEventListener('mouseup', function () {
+      iron.classList.remove('is-press');
+    });
+  }
+
+  function steam(x, y) {
+    var puffs = 5 + Math.floor(Math.random() * 3);
+
+    for (var i = 0; i < puffs; i++) {
+      var p = document.createElement('div');
+      p.className = 'lr-steam';
+
+      var size = 5 + Math.random() * 11;
+      p.style.width  = size + 'px';
+      p.style.height = size + 'px';
+      // Rise from just above the soleplate
+      p.style.left = (x - size / 2 + (Math.random() * 22 - 11)) + 'px';
+      p.style.top  = (y - size / 2 - 12) + 'px';
+      document.body.appendChild(p);
+
+      var drift = (Math.random() * 46 - 23);
+      var lift  = 42 + Math.random() * 46;
+      var dur   = 0.62 + Math.random() * 0.55;
+
+      if (window.gsap) {
+        gsap.to(p, {
+          x: drift, y: -lift,
+          scale: 1.9 + Math.random(),
+          opacity: 0,
+          duration: dur,
+          ease: 'power2.out',
+          delay: i * 0.035,
+          onComplete: function () { this.targets()[0].remove(); }
+        });
+      } else {
+        p.style.transition = 'transform ' + dur + 's ease-out, opacity ' + dur + 's ease-out';
+        (function (el, dx, dy) {
+          requestAnimationFrame(function () {
+            el.style.transform = 'translate(' + dx + 'px,' + (-dy) + 'px) scale(2.2)';
+            el.style.opacity = '0';
+          });
+          setTimeout(function () { el.remove(); }, dur * 1000 + 60);
+        })(p, drift, lift);
+      }
+    }
+  }
+
+  /* ============================================================
+     FLOATING ELEMENTS — drift, parallax, repel from cursor
+     ============================================================ */
+  var SHAPES = {
+    shirt: '<path d="M16 2l-2 3h-4L8 2 3 6v6l3 1v9h12v-9l3-1V6z"/>',
+    star:  '<polygon points="12,2 14.6,8.6 21.6,9 16.2,13.5 18,20.4 12,16.6 6,20.4 7.8,13.5 2.4,9 9.4,8.6"/>',
+    cross: '<path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z"/>',
+    ring:  '<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 4a6 6 0 110 12 6 6 0 010-12z"/>',
+    tri:   '<polygon points="12,3 22,20 2,20"/>'
+  };
+
+  function svgShape(kind, size, fill, stroke) {
+    return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" ' +
+      'fill="' + (stroke ? 'none' : fill) + '" ' +
+      (stroke ? 'stroke="' + fill + '" stroke-width="1"' : '') +
+      ' aria-hidden="true">' + SHAPES[kind] + '</svg>';
+  }
+
+  function initFloaters() {
+    var hero = document.querySelector('.lr-hero');
+    if (!hero || reduced) return;
+
+    var layer = document.createElement('div');
+    layer.className = 'lr-floaters';
+    hero.appendChild(layer);
+
+    var PALETTE = ['#C41E1E', '#E8C547', '#F2EDE3', '#4A4844'];
+    var KINDS = ['shirt', 'star', 'cross', 'ring', 'tri', 'shirt', 'star'];
+    var COUNT = window.innerWidth < 760 ? 8 : 16;
+    var items = [];
+
+    for (var i = 0; i < COUNT; i++) {
+      var el = document.createElement('div');
+      el.className = 'lr-floater';
+
+      var kind   = KINDS[i % KINDS.length];
+      var size   = 16 + Math.random() * 44;
+      var color  = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+      var hollow = Math.random() > 0.45;
+
+      el.innerHTML = svgShape(kind, size, color, hollow);
+      el.style.left = (Math.random() * 96) + '%';
+      el.style.top  = (Math.random() * 92) + '%';
+      el.style.opacity = (0.10 + Math.random() * 0.3).toFixed(2);
+
+      layer.appendChild(el);
+      items.push({ el: el, depth: 0.25 + Math.random() * 1.15, ox: 0, oy: 0 });
+    }
+
+    // Entrance + endless drift
+    if (window.gsap) {
+      gsap.to(layer.children, {
+        opacity: function (i, t) { return t.style.opacity; },
+        duration: 1.1, stagger: 0.04, delay: 0.7, ease: 'power2.out'
+      });
+
+      items.forEach(function (it) {
+        gsap.to(it.el, {
+          y: '+=' + (28 + Math.random() * 60) * (Math.random() > 0.5 ? 1 : -1),
+          x: '+=' + (16 + Math.random() * 40) * (Math.random() > 0.5 ? 1 : -1),
+          rotation: (Math.random() * 90 - 45),
+          duration: 6 + Math.random() * 7,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      });
+
+      // Parallax out of the hero on scroll
+      if (window.ScrollTrigger) {
+        items.forEach(function (it) {
+          gsap.to(it.el, {
+            yPercent: -34 * it.depth * 10,
+            ease: 'none',
+            scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true }
+          });
+        });
+      }
+    }
+
+    // Cursor repulsion — shapes shy away from the pointer
+    if (!fine) return;
+    var RANGE = 190;
+    var pending = false;
+
+    window.addEventListener('mousemove', function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () {
+        pending = false;
+        items.forEach(function (it) {
+          var r = it.el.getBoundingClientRect();
+          var dx = (r.left + r.width / 2) - mouse.x;
+          var dy = (r.top + r.height / 2) - mouse.y;
+          var d = Math.hypot(dx, dy);
+          var tx = 0, ty = 0;
+          if (d < RANGE && d > 0.1) {
+            var push = (1 - d / RANGE) * 58 * it.depth;
+            tx = (dx / d) * push;
+            ty = (dy / d) * push;
+          }
+          it.ox += (tx - it.ox) * 0.14;
+          it.oy += (ty - it.oy) * 0.14;
+          it.el.style.marginLeft = it.ox.toFixed(2) + 'px';
+          it.el.style.marginTop  = it.oy.toFixed(2) + 'px';
+        });
+      });
+    }, { passive: true });
+  }
+
+  /* ============================================================
+     PRODUCT CARD HOVER REVEAL
+     ============================================================ */
+  function initCardPeek() {
+    document.querySelectorAll('.card-wrapper, .product-card-wrapper').forEach(function (card) {
+      if (card.querySelector('.lr-card-peek')) return;
+      var peek = document.createElement('div');
+      peek.className = 'lr-card-peek';
+      peek.innerHTML = '<span>View</span><span>&#8599;</span>';
+      card.appendChild(peek);
     });
   }
 
@@ -138,11 +329,28 @@
           if (Math.hypot(ox, oy) < reach) {
             m.qx(ox * PULL); m.qy(oy * PULL); m.active = true;
           } else if (m.active) {
-            m.qx(0); m.qy(0); m.active = false;
+            // Elastic snap back — overshoots slightly, then settles
+            gsap.to(m.el, { x: 0, y: 0, duration: 0.85, ease: 'elastic.out(1, 0.42)' });
+            m.active = false;
           }
         });
       });
     }, { passive: true });
+
+    // Nav links get a lighter pull
+    document.querySelectorAll('.header a, header-component a, .menu__item').forEach(function (link) {
+      link.addEventListener('mousemove', function (e) {
+        var r = link.getBoundingClientRect();
+        gsap.to(link, {
+          x: (e.clientX - r.left - r.width / 2) * 0.28,
+          y: (e.clientY - r.top - r.height / 2) * 0.4,
+          duration: 0.32, ease: 'power2.out'
+        });
+      });
+      link.addEventListener('mouseleave', function () {
+        gsap.to(link, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+      });
+    });
   }
 
   /* ============================================================
@@ -482,6 +690,7 @@
     initCursor();
     initMarquee();
     initStamp();
+    initCardPeek();
 
     Promise.all([load(CDN.gsap), load(CDN.lenis), load(CDN.split)])
       .then(function () { return load(CDN.st); })
@@ -489,6 +698,7 @@
         if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
         initLenis();
         heroLoad();
+        initFloaters();
         initSplit();
         initReveals();
         initMagnetic();
