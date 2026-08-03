@@ -3,124 +3,126 @@
   All copy editable in the theme editor under this section's settings.
 {%- endcomment -%}
 
-<section class="lr-hero" id="lr-hero">
+<div class="lr-root">
+  <section class="lr-hero" id="lr-hero">
 
-  {%- comment -%} Layer 1 — texture {%- endcomment -%}
-  <div class="lr-hero-halftone" data-par="0.05"></div>
-  <div class="lr-hero-slab"></div>
+    {%- comment -%} Layer 1 — texture {%- endcomment -%}
+    <div class="lr-hero-halftone" data-par="0.05"></div>
+    <div class="lr-hero-slab"></div>
 
-  {%- comment -%} Layer 2 — diagonal outline ticker crossing the composition {%- endcomment -%}
-  <div class="lr-hero-diag" aria-hidden="true">
-    <div class="lr-diag-track">
-      <span>{% for i in (1..8) %}{{ section.settings.diag_text }} &nbsp;&middot;&nbsp; {% endfor %}</span>
+    {%- comment -%} Layer 2 — diagonal outline ticker crossing the composition {%- endcomment -%}
+    <div class="lr-hero-diag" aria-hidden="true">
+      <div class="lr-diag-track">
+        <span>{% for i in (1..8) %}{{ section.settings.diag_text }} &nbsp;&middot;&nbsp; {% endfor %}</span>
+      </div>
     </div>
-  </div>
 
-  {%- comment -%} Layer 3 — swinging clothesline {%- endcomment -%}
-  {%- if section.settings.show_clothesline -%}
-    <div class="lr-clothesline" data-par="0.12" aria-hidden="true">
-      <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMin slice">
-        <path d="M-20 34 Q600 128 1220 34" fill="none" stroke="var(--lr-muted)" stroke-width="2"/>
-        {%- assign xs = "150,352,554,756,958" | split: "," -%}
-        {%- assign ys = "58,73,80,78,66" | split: "," -%}
-        {%- assign cols = "#C41E1E,#E8C547,#F2EDE3,#C41E1E,#4A4844" | split: "," -%}
-        {%- for x in xs -%}
-          {%- assign idx = forloop.index0 -%}
-          {%- assign y = ys[idx] -%}
-          {%- assign c = cols[idx] -%}
-          <g class="lr-hang" data-ox="{{ x }}" data-oy="{{ y }}">
-            <line x1="{{ x }}" y1="{{ y }}" x2="{{ x }}" y2="{{ y | plus: 20 }}" stroke="var(--lr-muted-2)" stroke-width="1.5"/>
-            <g transform="translate({{ x | minus: 34 }}, {{ y | plus: 18 }}) scale(2.9)">
-              <path d="M16 2l-2 3h-4L8 2 3 6v6l3 1v9h12v-9l3-1V6z" fill="{{ c }}" opacity="0.85"/>
-              <path d="M16 2l-2 3h-4L8 2 3 6v6l3 1v9h12v-9l3-1V6z" fill="none" stroke="rgba(17,17,16,.45)" stroke-width="0.4"/>
+    {%- comment -%} Layer 3 — swinging clothesline {%- endcomment -%}
+    {%- if section.settings.show_clothesline -%}
+      <div class="lr-clothesline" data-par="0.12" aria-hidden="true">
+        <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMin slice">
+          <path d="M-20 34 Q600 128 1220 34" fill="none" stroke="var(--lr-muted)" stroke-width="2"/>
+          {%- assign xs = "150,352,554,756,958" | split: "," -%}
+          {%- assign ys = "58,73,80,78,66" | split: "," -%}
+          {%- assign cols = "#C41E1E,#E8C547,#F2EDE3,#C41E1E,#4A4844" | split: "," -%}
+          {%- for x in xs -%}
+            {%- assign idx = forloop.index0 -%}
+            {%- assign y = ys[idx] -%}
+            {%- assign c = cols[idx] -%}
+            <g class="lr-hang" data-ox="{{ x }}" data-oy="{{ y }}">
+              <line x1="{{ x }}" y1="{{ y }}" x2="{{ x }}" y2="{{ y | plus: 20 }}" stroke="var(--lr-muted-2)" stroke-width="1.5"/>
+              <g transform="translate({{ x | minus: 34 }}, {{ y | plus: 18 }}) scale(2.9)">
+                <path d="M16 2l-2 3h-4L8 2 3 6v6l3 1v9h12v-9l3-1V6z" fill="{{ c }}" opacity="0.85"/>
+                <path d="M16 2l-2 3h-4L8 2 3 6v6l3 1v9h12v-9l3-1V6z" fill="none" stroke="rgba(17,17,16,.45)" stroke-width="0.4"/>
+              </g>
             </g>
-          </g>
-        {%- endfor -%}
-      </svg>
-    </div>
-  {%- endif -%}
-
-  {%- comment -%} Layer 4 — rotating stamp {%- endcomment -%}
-  {%- if section.settings.show_stamp -%}
-    <div class="lr-stamp">
-      <svg id="lr-stamp-ring" viewBox="0 0 200 200" aria-hidden="true">
-        <defs>
-          <path id="lr-stamp-path" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-        </defs>
-        <text font-family="Archivo Black, sans-serif" font-size="15" fill="#E8C547" letter-spacing="4.5">
-          <textPath href="#lr-stamp-path">{{ section.settings.stamp_text }}</textPath>
-        </text>
-      </svg>
-      <div class="lr-stamp-core">{{ section.settings.stamp_core }}</div>
-    </div>
-  {%- endif -%}
-
-  {%- comment -%} Layer 5 — content {%- endcomment -%}
-  <div class="lr-hero-inner" data-par="-0.03">
-    <span class="lr-eyebrow">{{ section.settings.eyebrow }}</span>
-
-    <h1 class="lr-hero-head">
-      <span class="lr-line"><span>{{ section.settings.head_line_1 }}</span></span>
-      <span class="lr-line"><span class="lr-red-word">{{ section.settings.head_line_2 }}</span></span>
-    </h1>
-
-    {%- if section.settings.tagline != blank -%}
-      <p class="lr-hero-tagline">
-        <span>{{ section.settings.tagline }}</span>
-      </p>
+          {%- endfor -%}
+        </svg>
+      </div>
     {%- endif -%}
 
-    <div class="lr-hero-foot">
-      <div>
-        <p class="lr-body lr-hero-sub">{{ section.settings.subhead }}</p>
-        <div class="lr-hero-cta" style="margin-top:26px;">
-          <a href="{{ section.settings.cta_link }}" class="lr-btn" data-cursor="{{ section.settings.cta_cursor }}">
-            <span>{{ section.settings.cta_label }}</span>
-            <span class="lr-arw">&rarr;</span>
-          </a>
-          <a href="{{ section.settings.cta2_link }}" class="lr-btn-ghost">
-            <span>{{ section.settings.cta2_label }}</span>
-          </a>
-        </div>
+    {%- comment -%} Layer 4 — rotating stamp {%- endcomment -%}
+    {%- if section.settings.show_stamp -%}
+      <div class="lr-stamp">
+        <svg id="lr-stamp-ring" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <path id="lr-stamp-path" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
+          </defs>
+          <text font-family="Archivo Black, sans-serif" font-size="15" fill="#E8C547" letter-spacing="4.5">
+            <textPath href="#lr-stamp-path">{{ section.settings.stamp_text }}</textPath>
+          </text>
+        </svg>
+        <div class="lr-stamp-core">{{ section.settings.stamp_core }}</div>
       </div>
+    {%- endif -%}
 
-      <div class="lr-trust">
+    {%- comment -%} Layer 5 — content {%- endcomment -%}
+    <div class="lr-hero-inner" data-par="-0.03">
+      <span class="lr-eyebrow">{{ section.settings.eyebrow }}</span>
+
+      <h1 class="lr-hero-head">
+        <span class="lr-line"><span>{{ section.settings.head_line_1 }}</span></span>
+        <span class="lr-line"><span class="lr-red-word">{{ section.settings.head_line_2 }}</span></span>
+      </h1>
+
+      {%- if section.settings.tagline != blank -%}
+        <p class="lr-hero-tagline">
+          <span>{{ section.settings.tagline }}</span>
+        </p>
+      {%- endif -%}
+
+      <div class="lr-hero-foot">
         <div>
-          <span class="lr-trust-num" data-count="{{ section.settings.stat1_num }}" data-suffix="{{ section.settings.stat1_suffix }}">0</span>
-          <span class="lr-trust-lab">{{ section.settings.stat1_label }}</span>
+          <p class="lr-body lr-hero-sub">{{ section.settings.subhead }}</p>
+          <div class="lr-hero-cta" style="margin-top:26px;">
+            <a href="{{ section.settings.cta_link }}" class="lr-btn" data-cursor="{{ section.settings.cta_cursor }}">
+              <span>{{ section.settings.cta_label }}</span>
+              <span class="lr-arw">&rarr;</span>
+            </a>
+            <a href="{{ section.settings.cta2_link }}" class="lr-btn-ghost">
+              <span>{{ section.settings.cta2_label }}</span>
+            </a>
+          </div>
         </div>
-        <div>
-          <span class="lr-trust-num" data-count="{{ section.settings.stat2_num }}" data-suffix="{{ section.settings.stat2_suffix }}">0</span>
-          <span class="lr-trust-lab">{{ section.settings.stat2_label }}</span>
-        </div>
-        <div>
-          <span class="lr-trust-num" data-count="{{ section.settings.stat3_num }}" data-suffix="{{ section.settings.stat3_suffix }}">0</span>
-          <span class="lr-trust-lab">{{ section.settings.stat3_label }}</span>
+
+        <div class="lr-trust">
+          <div>
+            <span class="lr-trust-num" data-count="{{ section.settings.stat1_num }}" data-suffix="{{ section.settings.stat1_suffix }}">0</span>
+            <span class="lr-trust-lab">{{ section.settings.stat1_label }}</span>
+          </div>
+          <div>
+            <span class="lr-trust-num" data-count="{{ section.settings.stat2_num }}" data-suffix="{{ section.settings.stat2_suffix }}">0</span>
+            <span class="lr-trust-lab">{{ section.settings.stat2_label }}</span>
+          </div>
+          <div>
+            <span class="lr-trust-num" data-count="{{ section.settings.stat3_num }}" data-suffix="{{ section.settings.stat3_suffix }}">0</span>
+            <span class="lr-trust-lab">{{ section.settings.stat3_label }}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  {%- comment -%} Layer 6 — live status + scroll cue {%- endcomment -%}
-  {%- if section.settings.live_text != blank -%}
-    <div class="lr-live"><i></i><span>{{ section.settings.live_text }}</span></div>
+    {%- comment -%} Layer 6 — live status + scroll cue {%- endcomment -%}
+    {%- if section.settings.live_text != blank -%}
+      <div class="lr-live"><i></i><span>{{ section.settings.live_text }}</span></div>
+    {%- endif -%}
+
+    <div class="lr-scroll-cue"><span>Scroll</span><i></i></div>
+  </section>
+
+  {%- if section.settings.show_marquee -%}
+    <div class="lr-marquee lr-marquee--tilt" data-speed="0.6">
+      <div class="lr-marquee-track">
+        <span>
+          {%- assign items = section.settings.marquee_text | split: ',' -%}
+          {%- for item in items -%}
+            {{ item | strip }}<i class="lr-dot"></i>
+          {%- endfor -%}
+        </span>
+      </div>
+    </div>
   {%- endif -%}
-
-  <div class="lr-scroll-cue"><span>Scroll</span><i></i></div>
-</section>
-
-{%- if section.settings.show_marquee -%}
-  <div class="lr-marquee lr-marquee--tilt" data-speed="0.6">
-    <div class="lr-marquee-track">
-      <span>
-        {%- assign items = section.settings.marquee_text | split: ',' -%}
-        {%- for item in items -%}
-          {{ item | strip }}<i class="lr-dot"></i>
-        {%- endfor -%}
-      </span>
-    </div>
-  </div>
-{%- endif -%}
+</div>
 
 {% schema %}
 {

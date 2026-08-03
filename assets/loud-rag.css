@@ -30,6 +30,9 @@
    BASE
    ============================================================ */
 
+/* Single root wrapper each custom section renders into */
+.lr-root { display: block; position: relative; }
+
 html {
   background: var(--lr-ink);
 }

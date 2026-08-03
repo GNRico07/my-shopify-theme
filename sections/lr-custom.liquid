@@ -3,63 +3,65 @@
   Contact email: 510ricogn@gmail.com
 {%- endcomment -%}
 
-<section class="lr-cta lr-marks" id="lr-custom">
-  <div class="lr-cta-inner">
-    <span class="lr-eyebrow lr-fade-up" style="color: var(--lr-red);">{{ section.settings.eyebrow }}</span>
+<div class="lr-root">
+  <section class="lr-cta lr-marks" id="lr-custom">
+    <div class="lr-cta-inner">
+      <span class="lr-eyebrow lr-fade-up" style="color: var(--lr-red);">{{ section.settings.eyebrow }}</span>
 
-    <h2 class="lr-display-l lr-split" style="margin: 20px 0 22px;">{{ section.settings.heading }}</h2>
+      <h2 class="lr-display-l lr-split" style="margin: 20px 0 22px;">{{ section.settings.heading }}</h2>
 
-    <p class="lr-body lr-fade-up" style="max-width: 54ch; margin-inline: auto;">{{ section.settings.body }}</p>
+      <p class="lr-body lr-fade-up" style="max-width: 54ch; margin-inline: auto;">{{ section.settings.body }}</p>
 
-    <div class="lr-fade-up" style="margin-top: 38px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
-      <a href="mailto:{{ section.settings.email }}?subject={{ section.settings.email_subject | url_encode }}"
-         class="lr-btn" data-cursor="Email">
-        <span>{{ section.settings.cta_label }}</span>
-        <span class="lr-arw">&rarr;</span>
-      </a>
-      {%- if section.settings.phone != blank -%}
-        <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}" class="lr-btn-ghost" style="border-color: var(--lr-muted); color: var(--lr-ink) !important;">
-          <span>{{ section.settings.phone }}</span>
+      <div class="lr-fade-up" style="margin-top: 38px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+        <a href="mailto:{{ section.settings.email }}?subject={{ section.settings.email_subject | url_encode }}"
+           class="lr-btn" data-cursor="Email">
+          <span>{{ section.settings.cta_label }}</span>
+          <span class="lr-arw">&rarr;</span>
         </a>
-      {%- endif -%}
+        {%- if section.settings.phone != blank -%}
+          <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}" class="lr-btn-ghost" style="border-color: var(--lr-muted); color: var(--lr-ink) !important;">
+            <span>{{ section.settings.phone }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <p class="lr-mono" style="margin-top: 24px; color: var(--lr-muted);">
+        {{ section.settings.note_before }}
+        <a href="mailto:{{ section.settings.email }}" class="lr-mail">{{ section.settings.email }}</a>
+      </p>
+
+      <div class="lr-rule" style="background: rgba(17,17,16,.2); margin-block: 46px;"></div>
+
+      <div class="lr-fade-up" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:28px;text-align:left;">
+        <div>
+          <div class="lr-mono" style="color: var(--lr-red);">Based in</div>
+          <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.location }}</p>
+        </div>
+        <div>
+          <div class="lr-mono" style="color: var(--lr-red);">Ships</div>
+          <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.ships }}</p>
+        </div>
+        <div>
+          <div class="lr-mono" style="color: var(--lr-red);">Reply time</div>
+          <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.reply_time }}</p>
+        </div>
+        <div>
+          <div class="lr-mono" style="color: var(--lr-red);">Drops</div>
+          <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.drops }}</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <p class="lr-mono" style="margin-top: 24px; color: var(--lr-muted);">
-      {{ section.settings.note_before }}
-      <a href="mailto:{{ section.settings.email }}" class="lr-mail">{{ section.settings.email }}</a>
-    </p>
-
-    <div class="lr-rule" style="background: rgba(17,17,16,.2); margin-block: 46px;"></div>
-
-    <div class="lr-fade-up" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:28px;text-align:left;">
-      <div>
-        <div class="lr-mono" style="color: var(--lr-red);">Based in</div>
-        <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.location }}</p>
-      </div>
-      <div>
-        <div class="lr-mono" style="color: var(--lr-red);">Ships</div>
-        <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.ships }}</p>
-      </div>
-      <div>
-        <div class="lr-mono" style="color: var(--lr-red);">Reply time</div>
-        <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.reply_time }}</p>
-      </div>
-      <div>
-        <div class="lr-mono" style="color: var(--lr-red);">Drops</div>
-        <p style="font-family:var(--lr-display);font-size:1rem;text-transform:uppercase;margin-top:8px;color:var(--lr-ink);">{{ section.settings.drops }}</p>
-      </div>
+  <div class="lr-marquee" data-speed="0.5">
+    <div class="lr-marquee-track">
+      <span>
+        {%- assign m = section.settings.marquee_text | split: ',' -%}
+        {%- for item in m -%}
+          {{ item | strip }}<i class="lr-dot"></i>
+        {%- endfor -%}
+      </span>
     </div>
-  </div>
-</section>
-
-<div class="lr-marquee" data-speed="0.5">
-  <div class="lr-marquee-track">
-    <span>
-      {%- assign m = section.settings.marquee_text | split: ',' -%}
-      {%- for item in m -%}
-        {{ item | strip }}<i class="lr-dot"></i>
-      {%- endfor -%}
-    </span>
   </div>
 </div>
 
