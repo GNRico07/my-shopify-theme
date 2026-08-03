@@ -45,12 +45,18 @@
      ============================================================ */
   var mouse = { x: -300, y: -300 };
 
+  // Top-down iron: pointed soleplate, steam vents at the nose, handle loop
   var IRON_SVG =
-    '<svg viewBox="0 0 44 33" aria-hidden="true">' +
+    '<svg viewBox="0 0 40 56" aria-hidden="true">' +
       '<g class="lr-iron-wrap">' +
-        '<path class="lr-iron-grip" d="M12 13 Q12 4 22 4 Q32 4 32 13" fill="none" stroke-width="3" stroke-linecap="round"/>' +
-        '<path class="lr-iron-body" d="M7 24 L7 17 Q7 11 15 11 L26 11 Q36 11 38 24 Z"/>' +
-        '<path class="lr-iron-plate" d="M4 25 H40 L36 31 H8 Z"/>' +
+        '<path class="lr-iron-body" d="M20 2 C11 12 5.5 22 5.5 34 C5.5 46.5 12 53.5 20 53.5 C28 53.5 34.5 46.5 34.5 34 C34.5 22 29 12 20 2 Z"/>' +
+        '<circle class="lr-iron-vent" cx="20" cy="11.5" r="1.5"/>' +
+        '<circle class="lr-iron-vent" cx="14.6" cy="18"   r="1.5"/>' +
+        '<circle class="lr-iron-vent" cx="25.4" cy="18"   r="1.5"/>' +
+        '<circle class="lr-iron-vent" cx="11"   cy="26"   r="1.4"/>' +
+        '<circle class="lr-iron-vent" cx="29"   cy="26"   r="1.4"/>' +
+        '<rect class="lr-iron-heel" x="12" y="46.5" width="16" height="3.4" rx="1.7"/>' +
+        '<rect class="lr-iron-grip" x="12.6" y="23" width="14.8" height="22" rx="7.4" fill="none" stroke-width="2.6"/>' +
       '</g>' +
     '</svg>';
 
@@ -81,13 +87,13 @@
       lx += (mouse.x - lx) * 0.13;
       ly += (mouse.y - ly) * 0.13;
 
-      // Tilt into the direction of travel, capped and eased back
-      var target = Math.max(-14, Math.min(14, (ix - px) * 1.4));
-      tilt += (target - tilt) * 0.12;
+      // Steer the nose toward horizontal travel, capped and eased back
+      var target = Math.max(-24, Math.min(24, (ix - px) * 2.1));
+      tilt += (target - tilt) * 0.11;
 
-      // Anchor near the soleplate tip so the iron sits under the pointer
+      // Pointer sits at the centre of the soleplate
       iron.style.transform =
-        'translate(' + ix + 'px,' + iy + 'px) translate(-34%, -78%) rotate(' + tilt.toFixed(2) + 'deg)';
+        'translate(' + ix + 'px,' + iy + 'px) translate(-50%, -50%) rotate(' + tilt.toFixed(2) + 'deg)';
       lab.style.transform =
         'translate(' + lx + 'px,' + ly + 'px) translate(-50%,-50%) scale(' +
         (lab.classList.contains('is-on') ? 1 : 0) + ')';
@@ -112,18 +118,23 @@
     document.addEventListener('mouseleave', function () { iron.style.opacity = '0'; });
     document.addEventListener('mouseenter', function () { iron.style.opacity = '1'; });
 
-    /* --- Steam on click --- */
+    /* --- Steam on click, vented out of the nose --- */
     document.addEventListener('mousedown', function () {
       iron.classList.add('is-press');
-      steam(mouse.x, mouse.y);
+      steam(mouse.x, mouse.y, tilt);
     });
     document.addEventListener('mouseup', function () {
       iron.classList.remove('is-press');
     });
   }
 
-  function steam(x, y) {
+  function steam(x, y, deg) {
     var puffs = 5 + Math.floor(Math.random() * 3);
+    var rad = (deg || 0) * Math.PI / 180;
+
+    // Vents sit ~22px ahead of centre; follow the nose as it steers
+    var nx = x + Math.sin(rad) * 22;
+    var ny = y - Math.cos(rad) * 22;
 
     for (var i = 0; i < puffs; i++) {
       var p = document.createElement('div');
@@ -132,13 +143,13 @@
       var size = 5 + Math.random() * 11;
       p.style.width  = size + 'px';
       p.style.height = size + 'px';
-      // Rise from just above the soleplate
-      p.style.left = (x - size / 2 + (Math.random() * 22 - 11)) + 'px';
-      p.style.top  = (y - size / 2 - 12) + 'px';
+      p.style.left = (nx - size / 2 + (Math.random() * 16 - 8)) + 'px';
+      p.style.top  = (ny - size / 2 + (Math.random() * 10 - 5)) + 'px';
       document.body.appendChild(p);
 
-      var drift = (Math.random() * 46 - 23);
-      var lift  = 42 + Math.random() * 46;
+      // Drift outward along the nose direction, mostly upward
+      var drift = Math.sin(rad) * 26 + (Math.random() * 38 - 19);
+      var lift  = 40 + Math.random() * 44;
       var dur   = 0.62 + Math.random() * 0.55;
 
       if (window.gsap) {

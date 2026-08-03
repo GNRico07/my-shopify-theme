@@ -98,11 +98,11 @@ p, li, span, a, button, input, select, textarea, label {
   body, a, button, [role="button"] { cursor: none !important; }
 }
 
-/* --- Iron cursor --- */
+/* --- Iron cursor — top-down, nose leading --- */
 #lr-iron {
   position: fixed;
   top: 0; left: 0;
-  width: 44px; height: 33px;
+  width: 34px; height: 48px;
   pointer-events: none;
   z-index: 9999;
   will-change: transform;
@@ -110,19 +110,28 @@ p, li, span, a, button, input, select, textarea, label {
 
 #lr-iron svg { display: block; width: 100%; height: 100%; overflow: visible; }
 
-#lr-iron .lr-iron-body  { fill: var(--lr-bone); transition: fill .2s linear; }
-#lr-iron .lr-iron-plate { fill: var(--lr-red); }
-#lr-iron .lr-iron-grip  { stroke: var(--lr-bone); transition: stroke .2s linear; }
+#lr-iron .lr-iron-body {
+  fill: var(--lr-bone);
+  stroke: rgba(17, 17, 16, .35);
+  stroke-width: .8;
+  transition: fill .2s linear;
+}
 
-#lr-iron.is-hover .lr-iron-body  { fill: var(--lr-mustard); }
-#lr-iron.is-hover .lr-iron-grip  { stroke: var(--lr-mustard); }
+#lr-iron .lr-iron-vent  { fill: var(--lr-ink); opacity: .55; transition: fill .2s linear; }
+#lr-iron .lr-iron-grip  { stroke: var(--lr-red); transition: stroke .2s linear; }
+#lr-iron .lr-iron-heel  { fill: var(--lr-red); transition: fill .2s linear; }
 
-/* Press-down squash on click */
+#lr-iron.is-hover .lr-iron-body { fill: var(--lr-mustard); }
+#lr-iron.is-hover .lr-iron-grip { stroke: var(--lr-ink); }
+#lr-iron.is-hover .lr-iron-heel { fill: var(--lr-ink); }
+
+/* Press — the iron bears down into the page */
 #lr-iron .lr-iron-wrap {
-  transform-origin: 50% 88%;
+  transform-origin: 50% 50%;
   transition: transform .13s cubic-bezier(.3,1.4,.5,1);
 }
-#lr-iron.is-press .lr-iron-wrap { transform: translateY(3px) scaleY(.9); }
+#lr-iron.is-press .lr-iron-wrap { transform: scale(.9); }
+#lr-iron.is-press .lr-iron-vent { fill: var(--lr-red); opacity: 1; }
 
 /* --- Steam puffs --- */
 .lr-steam {
