@@ -1,0 +1,145 @@
+{%- comment -%}
+  LOUD RAG — Header
+  Add this to the Header group and remove the default Header section.
+{%- endcomment -%}
+
+<div class="lr-root lr-head-root">
+
+  {%- if section.settings.show_announcement -%}
+    <div class="lr-announce">
+      <div class="lr-announce-track">
+        <span>
+          {%- assign bits = section.settings.announcement_text | split: ',' -%}
+          {%- for bit in bits -%}
+            {{ bit | strip }}<i class="lr-dot"></i>
+          {%- endfor -%}
+        </span>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <header class="lr-header" id="lr-header">
+    <div class="lr-header-bar">
+
+      <a href="{{ routes.root_url }}" class="lr-wordmark" data-cursor="Home">
+        <span>{{ section.settings.wordmark_1 }}</span><span class="lr-wm-red">{{ section.settings.wordmark_2 }}</span>
+      </a>
+
+      <nav class="lr-nav" aria-label="Primary">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="lr-nav-link{% if link.active %} is-active{% endif %}">
+            <span class="lr-nav-txt">{{ link.title }}</span>
+            <span class="lr-nav-txt lr-nav-txt--dup" aria-hidden="true">{{ link.title }}</span>
+          </a>
+        {%- endfor -%}
+      </nav>
+
+      <div class="lr-head-actions">
+        {%- if section.settings.show_search -%}
+          <a href="{{ routes.search_url }}" class="lr-icon-btn" aria-label="Search" data-cursor="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.show_account -%}
+          <a href="{{ routes.account_url }}" class="lr-icon-btn" aria-label="Account">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        <a href="{{ routes.cart_url }}" class="lr-cart" data-cursor="Cart">
+          <span>Cart</span>
+          <em class="lr-cart-count" data-cart-count>{{ cart.item_count }}</em>
+        </a>
+
+        <button class="lr-burger" id="lr-burger" aria-label="Menu" aria-expanded="false">
+          <i></i><i></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lr-drawer" id="lr-drawer" aria-hidden="true">
+    <div class="lr-drawer-inner">
+      <nav class="lr-drawer-nav">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="lr-drawer-link" style="transition-delay: {{ forloop.index0 | times: 40 }}ms;">
+            <span class="lr-drawer-num">0{{ forloop.index }}</span>{{ link.title }}
+          </a>
+        {%- endfor -%}
+      </nav>
+      <div class="lr-drawer-foot">
+        <a href="mailto:{{ section.settings.email }}" class="lr-drawer-mail">{{ section.settings.email }}</a>
+        <p class="lr-mono">{{ section.settings.drawer_note }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "LR Header",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "text",
+      "id": "wordmark_1",
+      "label": "Wordmark first part",
+      "default": "LOUD"
+    },
+    {
+      "type": "text",
+      "id": "wordmark_2",
+      "label": "Wordmark second part (red)",
+      "default": "RAG"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement marquee",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "announcement_text",
+      "label": "Announcement items (comma separated)",
+      "default": "New drop the 1st of every month, Free shipping over $60, Printed in Boise Idaho, Custom orders welcome"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Menu drawer email",
+      "default": "510ricogn@gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "drawer_note",
+      "label": "Menu drawer note",
+      "default": "Boise, Idaho — Wear the Laugh"
+    }
+  ],
+  "presets": [{ "name": "LR Header", "category": "Loud Rag" }]
+}
+{% endschema %}

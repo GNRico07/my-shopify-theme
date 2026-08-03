@@ -434,6 +434,85 @@
   }
 
   /* ============================================================
+     HEADER — hide on scroll down, reveal on scroll up,
+     announcement marquee, mobile drawer
+     ============================================================ */
+  function initHeader() {
+    var head = document.getElementById('lr-header');
+
+    if (head) {
+      var last = window.scrollY, ticking = false;
+
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          var y = window.scrollY;
+
+          head.classList.toggle('is-solid', y > 40);
+
+          // Never hide near the very top, or while the drawer is open
+          var drawerOpen = document.body.classList.contains('lr-drawer-open');
+          if (y > 180 && y > last + 4 && !drawerOpen) {
+            head.classList.add('is-hidden');
+          } else if (y < last - 4 || y < 120) {
+            head.classList.remove('is-hidden');
+          }
+          last = y;
+        });
+      }, { passive: true });
+    }
+
+    /* Announcement marquee */
+    var track = document.querySelector('.lr-announce-track');
+    if (track && !reduced) {
+      var unit = track.querySelector('span');
+      if (unit) {
+        var uw = unit.getBoundingClientRect().width;
+        if (uw > 1) {
+          var copies = Math.min(Math.ceil((window.innerWidth * 2) / uw) + 1, 30);
+          for (var i = 0; i < copies; i++) track.appendChild(unit.cloneNode(true));
+          var half = track.scrollWidth / 2, pos = 0;
+          (function tick() {
+            pos -= 0.4;
+            if (pos <= -half) pos += half;
+            track.style.transform = 'translate3d(' + pos + 'px,0,0)';
+            requestAnimationFrame(tick);
+          })();
+        }
+      }
+    }
+
+    /* Mobile drawer */
+    var burger = document.getElementById('lr-burger');
+    var drawer = document.getElementById('lr-drawer');
+    if (!burger || !drawer) return;
+
+    function setOpen(open) {
+      burger.classList.toggle('is-open', open);
+      drawer.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.classList.toggle('lr-drawer-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (window.__lrLenis) { open ? window.__lrLenis.stop() : window.__lrLenis.start(); }
+    }
+
+    burger.addEventListener('click', function () {
+      setOpen(!drawer.classList.contains('is-open'));
+    });
+
+    drawer.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) setOpen(false);
+    });
+  }
+
+  /* ============================================================
      PRODUCT CARD HOVER REVEAL
      ============================================================ */
   function initCardPeek() {
@@ -525,6 +604,8 @@
       wheelMultiplier: 0.95,
       touchMultiplier: 1.6
     });
+
+    window.__lrLenis = lenis;
 
     if (window.ScrollTrigger) {
       lenis.on('scroll', ScrollTrigger.update);
@@ -855,6 +936,7 @@
   function boot() {
     initGrain();
     initCursor();
+    initHeader();
     initMarquee();
     initDiagTicker();
     initStamp();
