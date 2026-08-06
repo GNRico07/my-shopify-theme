@@ -40,40 +40,22 @@
   }
 
   /* ============================================================
-     IRON CURSOR — follows the pointer, tilts with travel,
-     puffs steam on click
+     CURSOR — small dot on the pointer, ring trailing behind.
+     Opens on hover, contracts and ripples on click.
      ============================================================ */
   var mouse = { x: -300, y: -300 };
-
-  // Top-down iron: pointed soleplate, steam vents at the nose, handle loop
-  var IRON_SVG =
-    '<svg viewBox="0 0 40 56" aria-hidden="true">' +
-      '<g class="lr-iron-wrap">' +
-        '<path class="lr-iron-body" d="M20 2 C11 12 5.5 22 5.5 34 C5.5 46.5 12 53.5 20 53.5 C28 53.5 34.5 46.5 34.5 34 C34.5 22 29 12 20 2 Z"/>' +
-        '<circle class="lr-iron-vent" cx="20" cy="11.5" r="1.5"/>' +
-        '<circle class="lr-iron-vent" cx="14.6" cy="18"   r="1.5"/>' +
-        '<circle class="lr-iron-vent" cx="25.4" cy="18"   r="1.5"/>' +
-        '<circle class="lr-iron-vent" cx="11"   cy="26"   r="1.4"/>' +
-        '<circle class="lr-iron-vent" cx="29"   cy="26"   r="1.4"/>' +
-        '<rect class="lr-iron-heel" x="12" y="46.5" width="16" height="3.4" rx="1.7"/>' +
-        '<rect class="lr-iron-grip" x="12.6" y="23" width="14.8" height="22" rx="7.4" fill="none" stroke-width="2.6"/>' +
-      '</g>' +
-    '</svg>';
 
   function initCursor() {
     if (!fine) return;
 
-    var iron = document.createElement('div');
-    iron.id = 'lr-iron';
-    iron.innerHTML = IRON_SVG;
-
-    var lab = document.createElement('div');
-    lab.id = 'lr-cursor-label';
-
-    document.body.appendChild(iron);
+    var dot  = document.createElement('div'); dot.id  = 'lr-dot';
+    var ring = document.createElement('div'); ring.id = 'lr-ring';
+    var lab  = document.createElement('div'); lab.id  = 'lr-cursor-label';
+    document.body.appendChild(ring);
+    document.body.appendChild(dot);
     document.body.appendChild(lab);
 
-    var ix = -300, iy = -300, lx = -300, ly = -300, tilt = 0;
+    var dx = -300, dy = -300, rx = -300, ry = -300, lx = -300, ly = -300;
 
     document.addEventListener('mousemove', function (e) {
       mouse.x = e.clientX;
@@ -81,21 +63,17 @@
     }, { passive: true });
 
     (function loop() {
-      var px = ix;
-      ix += (mouse.x - ix) * 0.2;
-      iy += (mouse.y - iy) * 0.2;
-      lx += (mouse.x - lx) * 0.13;
-      ly += (mouse.y - ly) * 0.13;
+      // Dot tracks almost 1:1, ring lags for the elastic feel
+      dx += (mouse.x - dx) * 0.55;
+      dy += (mouse.y - dy) * 0.55;
+      rx += (mouse.x - rx) * 0.16;
+      ry += (mouse.y - ry) * 0.16;
+      lx += (mouse.x - lx) * 0.14;
+      ly += (mouse.y - ly) * 0.14;
 
-      // Steer the nose toward horizontal travel, capped and eased back
-      var target = Math.max(-24, Math.min(24, (ix - px) * 2.1));
-      tilt += (target - tilt) * 0.11;
-
-      // Pointer sits at the centre of the soleplate
-      iron.style.transform =
-        'translate(' + ix + 'px,' + iy + 'px) translate(-50%, -50%) rotate(' + tilt.toFixed(2) + 'deg)';
-      lab.style.transform =
-        'translate(' + lx + 'px,' + ly + 'px) translate(-50%,-50%) scale(' +
+      dot.style.transform  = 'translate(' + dx + 'px,' + dy + 'px) translate(-50%,-50%)';
+      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%)';
+      lab.style.transform  = 'translate(' + lx + 'px,' + ly + 'px) translate(-50%,-50%) scale(' +
         (lab.classList.contains('is-on') ? 1 : 0) + ')';
 
       requestAnimationFrame(loop);
@@ -106,72 +84,54 @@
     document.addEventListener('mouseover', function (e) {
       var h = e.target.closest(HOVER);
       if (h) {
-        iron.classList.add('is-hover');
+        dot.classList.add('is-hover');
+        ring.classList.add('is-hover');
         var l = h.getAttribute('data-cursor');
         if (l) { lab.textContent = l; lab.classList.add('is-on'); }
         return;
       }
-      iron.classList.remove('is-hover');
+      dot.classList.remove('is-hover');
+      ring.classList.remove('is-hover');
       lab.classList.remove('is-on');
     }, { passive: true });
 
-    document.addEventListener('mouseleave', function () { iron.style.opacity = '0'; });
-    document.addEventListener('mouseenter', function () { iron.style.opacity = '1'; });
+    document.addEventListener('mouseleave', function () {
+      dot.style.opacity = '0'; ring.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', function () {
+      dot.style.opacity = ''; ring.style.opacity = '';
+    });
 
-    /* --- Steam on click, vented out of the nose --- */
     document.addEventListener('mousedown', function () {
-      iron.classList.add('is-press');
-      steam(mouse.x, mouse.y, tilt);
+      ring.classList.add('is-press');
+      ripple(mouse.x, mouse.y);
     });
     document.addEventListener('mouseup', function () {
-      iron.classList.remove('is-press');
+      ring.classList.remove('is-press');
     });
   }
 
-  function steam(x, y, deg) {
-    var puffs = 5 + Math.floor(Math.random() * 3);
-    var rad = (deg || 0) * Math.PI / 180;
+  /* Single expanding ring on click */
+  function ripple(x, y) {
+    var r = document.createElement('div');
+    r.className = 'lr-ripple';
+    r.style.left = x + 'px';
+    r.style.top  = y + 'px';
+    document.body.appendChild(r);
 
-    // Vents sit ~22px ahead of centre; follow the nose as it steers
-    var nx = x + Math.sin(rad) * 22;
-    var ny = y - Math.cos(rad) * 22;
-
-    for (var i = 0; i < puffs; i++) {
-      var p = document.createElement('div');
-      p.className = 'lr-steam';
-
-      var size = 5 + Math.random() * 11;
-      p.style.width  = size + 'px';
-      p.style.height = size + 'px';
-      p.style.left = (nx - size / 2 + (Math.random() * 16 - 8)) + 'px';
-      p.style.top  = (ny - size / 2 + (Math.random() * 10 - 5)) + 'px';
-      document.body.appendChild(p);
-
-      // Drift outward along the nose direction, mostly upward
-      var drift = Math.sin(rad) * 26 + (Math.random() * 38 - 19);
-      var lift  = 40 + Math.random() * 44;
-      var dur   = 0.62 + Math.random() * 0.55;
-
-      if (window.gsap) {
-        gsap.to(p, {
-          x: drift, y: -lift,
-          scale: 1.9 + Math.random(),
-          opacity: 0,
-          duration: dur,
-          ease: 'power2.out',
-          delay: i * 0.035,
-          onComplete: function () { this.targets()[0].remove(); }
-        });
-      } else {
-        p.style.transition = 'transform ' + dur + 's ease-out, opacity ' + dur + 's ease-out';
-        (function (el, dx, dy) {
-          requestAnimationFrame(function () {
-            el.style.transform = 'translate(' + dx + 'px,' + (-dy) + 'px) scale(2.2)';
-            el.style.opacity = '0';
-          });
-          setTimeout(function () { el.remove(); }, dur * 1000 + 60);
-        })(p, drift, lift);
-      }
+    if (window.gsap) {
+      gsap.fromTo(r,
+        { scale: 0.4, opacity: 0.9 },
+        { scale: 2.4, opacity: 0, duration: 0.5, ease: 'power2.out',
+          onComplete: function () { r.remove(); } }
+      );
+    } else {
+      r.style.transition = 'transform .5s ease-out, opacity .5s ease-out';
+      requestAnimationFrame(function () {
+        r.style.transform = 'scale(2.4)';
+        r.style.opacity = '0';
+      });
+      setTimeout(function () { r.remove(); }, 560);
     }
   }
 
@@ -665,7 +625,6 @@
       }, '-=0.75')
       .from(hero.querySelector('.lr-hero-diag'), { opacity: 0, duration: 0.8 }, '-=0.8')
       .from(hero.querySelectorAll('.lr-hero-sub'), { opacity: 0, y: 22, duration: 0.7 }, '-=0.5')
-      .from(hero.querySelectorAll('.lr-hero-cta > *'), { opacity: 0, y: 18, duration: 0.6, stagger: 0.09 }, '-=0.5')
       .from(hero.querySelectorAll('.lr-trust > *'), { opacity: 0, y: 16, duration: 0.5, stagger: 0.07 }, '-=0.45')
       .from(hero.querySelector('.lr-stamp'), { opacity: 0, scale: 0.6, rotate: -50, duration: 0.9, ease: 'back.out(1.6)' }, '-=0.7')
       .from(hero.querySelector('.lr-scroll-cue'), { opacity: 0, duration: 0.5 }, '-=0.3')

@@ -101,53 +101,60 @@ p, li, span, a, button, input, select, textarea, label {
   body, a, button, [role="button"] { cursor: none !important; }
 }
 
-/* --- Iron cursor — top-down, nose leading --- */
-#lr-iron {
+/* --- Dot: sits exactly on the pointer --- */
+#lr-dot {
   position: fixed;
   top: 0; left: 0;
-  width: 34px; height: 48px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--lr-bone);
+  pointer-events: none;
+  z-index: 10000;
+  will-change: transform;
+  transition: width .2s ease, height .2s ease, background .2s ease, opacity .2s ease;
+}
+
+#lr-dot.is-hover { width: 4px; height: 4px; background: var(--lr-mustard); }
+
+/* --- Ring: trails slightly behind, opens on hover --- */
+#lr-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 30px; height: 30px;
+  border: 1px solid rgba(242, 237, 227, .55);
+  border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   will-change: transform;
+  transition: width .3s cubic-bezier(.2,.9,.2,1),
+              height .3s cubic-bezier(.2,.9,.2,1),
+              border-color .22s ease,
+              background .22s ease,
+              opacity .2s ease;
 }
 
-#lr-iron svg { display: block; width: 100%; height: 100%; overflow: visible; }
-
-#lr-iron .lr-iron-body {
-  fill: var(--lr-bone);
-  stroke: rgba(17, 17, 16, .35);
-  stroke-width: .8;
-  transition: fill .2s linear;
+#lr-ring.is-hover {
+  width: 46px; height: 46px;
+  border-color: var(--lr-mustard);
+  background: rgba(232, 197, 71, .1);
 }
 
-#lr-iron .lr-iron-vent  { fill: var(--lr-ink); opacity: .55; transition: fill .2s linear; }
-#lr-iron .lr-iron-grip  { stroke: var(--lr-red); transition: stroke .2s linear; }
-#lr-iron .lr-iron-heel  { fill: var(--lr-red); transition: fill .2s linear; }
+#lr-ring.is-press { width: 22px; height: 22px; border-color: var(--lr-red); }
 
-#lr-iron.is-hover .lr-iron-body { fill: var(--lr-mustard); }
-#lr-iron.is-hover .lr-iron-grip { stroke: var(--lr-ink); }
-#lr-iron.is-hover .lr-iron-heel { fill: var(--lr-ink); }
-
-/* Press — the iron bears down into the page */
-#lr-iron .lr-iron-wrap {
-  transform-origin: 50% 50%;
-  transition: transform .13s cubic-bezier(.3,1.4,.5,1);
-}
-#lr-iron.is-press .lr-iron-wrap { transform: scale(.9); }
-#lr-iron.is-press .lr-iron-vent { fill: var(--lr-red); opacity: 1; }
-
-/* --- Steam puffs --- */
-.lr-steam {
+/* Click ripple */
+.lr-ripple {
   position: fixed;
+  top: 0; left: 0;
+  width: 26px; height: 26px;
+  margin: -13px 0 0 -13px;
+  border: 1px solid var(--lr-red);
+  border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
-  border-radius: 50%;
-  background: var(--lr-bone);
-  opacity: .5;
   will-change: transform, opacity;
 }
 
-@media (hover: none) { #lr-iron { display: none; } }
+@media (hover: none) { #lr-dot, #lr-ring { display: none; } }
 
 #lr-cursor-label {
   position: fixed;
